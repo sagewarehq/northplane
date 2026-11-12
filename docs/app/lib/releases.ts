@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 export const docsBuild = __HEADPLANE_DOCS__;
 
-export const stableOrigin = "https://headplane.net";
-export const betaOrigin = "https://beta.headplane.net";
+// Only main is published for now, so stable and beta share one site. The
+// version picker and banner stay hidden until a build sets a docs channel.
+export const stableOrigin = "https://northplane.sageware.io";
+export const betaOrigin = "https://northplane.sageware.io";
 
 export interface Release {
   version: string;

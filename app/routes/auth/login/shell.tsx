@@ -34,7 +34,7 @@ export default function Shell({ title, description, isWide, children }: Props) {
         <footer className="text-muted-foreground flex flex-wrap items-center justify-between gap-2 p-6 text-xs sm:p-8">
           <p>The web interface for Headscale.</p>
           <span className="flex gap-3">
-            <Link className="hover:text-foreground" external to="https://headplane.net">
+            <Link className="hover:text-foreground" external to="https://northplane.sageware.io">
               Docs
             </Link>
             <Link className="hover:text-foreground" external to="https://github.com/tale/headplane">

@@ -1,5 +1,9 @@
 # Next
 
+## Changes
+
+- The docs now live at [northplane.sageware.io](https://northplane.sageware.io), built from `main`. Links in the interface, the README and `config.example.yaml` point there instead of headplane.net.
+
 # 0.9.0 (November 12, 2026)
 
 ## Upgrading

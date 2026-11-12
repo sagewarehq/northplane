@@ -70,7 +70,7 @@ export default function Page({
         <Callout className="mb-6" variant="warning">
           Changes are saved to the Headscale configuration but only take effect once Headscale
           restarts. Set up an{" "}
-          <Link external styled to="https://headplane.net/configuration/integrations">
+          <Link external styled to="https://northplane.sageware.io/configuration/integrations">
             integration
           </Link>{" "}
           to restart it automatically.
