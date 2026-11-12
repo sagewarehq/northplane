@@ -142,14 +142,21 @@ for (const version of testedVersions()) {
     test("a hung agent is replaced on its own without re-registering", async () => {
       harness = await createHarness(version);
       const agent = await harness.startAgent();
-      const { syncedAt } = await waitForSync(agent);
+      await waitForSync(agent);
       const node = await harness.expectSettled(agent, 1);
 
+      const [hungPid] = agentPids();
       harness.signalAgent("SIGSTOP");
+      // A sync already running when the agent froze makes this one return at
+      // once, so wait for whichever sync reaches the frozen agent to replace it.
       await syncWithin(agent, SYNC_DEADLINE_MS);
-      expect(agent.lastSync().error).toBeTruthy();
+      await vi.waitFor(() => expect(agentPids()).not.toContain(hungPid), {
+        timeout: 60_000,
+        interval: 250,
+      });
+      const replacedAt = new Date();
 
-      await waitForNextSync(agent, syncedAt!);
+      await waitForNextSync(agent, replacedAt);
 
       const after = await harness.expectSettled(agent, 1);
       expect(after.id).toBe(node.id);
