@@ -20,7 +20,7 @@ export function Section({ title, description, isDisabled, onAdd, children }: Sec
       <div className="mb-3 flex items-end justify-between gap-4">
         <div>
           <h2 className="text-lg font-medium">{title}</h2>
-          <p className="text-muted max-w-prose text-sm">{description}</p>
+          <p className="text-muted-foreground max-w-prose text-sm">{description}</p>
         </div>
         <Button className="shrink-0" disabled={isDisabled} onClick={onAdd} type="button">
           <Plus className="size-4" />

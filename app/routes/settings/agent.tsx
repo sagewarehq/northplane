@@ -130,7 +130,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
   }
 
   const { self, missing, machineCount, isHeadscaleDown, hasMachines } = loaderData;
-  const unavailable = <p className="text-muted py-2.5 text-sm">Unavailable</p>;
+  const unavailable = <p className="text-muted-foreground py-2.5 text-sm">Unavailable</p>;
   const isPending = !loaderData.syncedAt && Boolean(loaderData.authUrl);
   const hasError = Boolean(loaderData.error);
   const intervalMinutes = Math.max(1, Math.round(loaderData.intervalMs / 60_000));
@@ -151,8 +151,8 @@ export default function Page({ loaderData }: Route.ComponentProps) {
       />
       {isPending && loaderData.authUrl && (
         <Callout className="mb-6" title="Waiting for approval" variant="warning">
-          Headplane tries to approve the agent's tailnet registration automatically. If that doesn't
-          work,{" "}
+          Northplane tries to approve the agent's tailnet registration automatically. If that
+          doesn't work,{" "}
           <Link external styled to={loaderData.authUrl}>
             approve it here
           </Link>
@@ -182,9 +182,9 @@ export default function Page({ loaderData }: Route.ComponentProps) {
                 {formatTimeDelta(new Date(loaderData.syncedAt))}
               </span>
             ) : (
-              <span className="text-muted">Never</span>
+              <span className="text-muted-foreground">Never</span>
             )}
-            <span className="text-muted">
+            <span className="text-muted-foreground">
               {" "}
               · every {intervalMinutes} {intervalMinutes === 1 ? "minute" : "minutes"}
             </span>
@@ -198,7 +198,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
                 Started {formatTimeDelta(new Date(loaderData.startedAt))}
               </span>
             ) : (
-              <span className="text-muted">Not running</span>
+              <span className="text-muted-foreground">Not running</span>
             )}
           </SettingRow>
         </SettingList>
@@ -227,7 +227,9 @@ export default function Page({ loaderData }: Route.ComponentProps) {
             </SettingRow>
           </SettingList>
         ) : (
-          <p className="text-muted py-2.5 text-sm">The agent hasn't joined the tailnet yet.</p>
+          <p className="text-muted-foreground py-2.5 text-sm">
+            The agent hasn't joined the tailnet yet.
+          </p>
         )}
       </Section>
       <Section
@@ -247,7 +249,10 @@ export default function Page({ loaderData }: Route.ComponentProps) {
             {missing.map((node) => (
               <Row
                 action={
-                  <span className="text-muted text-sm whitespace-nowrap" suppressHydrationWarning>
+                  <span
+                    className="text-muted-foreground text-sm whitespace-nowrap"
+                    suppressHydrationWarning
+                  >
                     {node.updatedAt
                       ? `Details from ${formatTimeDelta(new Date(node.updatedAt))}`
                       : "No details yet"}

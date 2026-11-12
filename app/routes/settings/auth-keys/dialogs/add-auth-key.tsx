@@ -68,7 +68,7 @@ export default function AddAuthKey({
           <DialogTitle>Auth key created</DialogTitle>
           <DialogDescription>Copy the key now. It won&apos;t be shown again.</DialogDescription>
           <CodeBlock>{key}</CodeBlock>
-          <p className="text-muted">Register a device with it:</p>
+          <p className="text-muted-foreground">Register a device with it:</p>
           <CodeBlock>{`tailscale up --login-server=${url} --authkey ${key}`}</CodeBlock>
         </>
       )}

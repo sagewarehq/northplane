@@ -27,7 +27,7 @@ export default function Link(props: LinkProps): JSX.Element {
         target="_blank"
         rel="noreferrer"
         className={cn(
-          props.styled && ["inline-flex items-center gap-x-0.5", "text-accent hover:text-accent"],
+          props.styled && ["inline-flex items-center gap-x-0.5", "text-brand hover:text-brand"],
           props.className,
         )}
       >

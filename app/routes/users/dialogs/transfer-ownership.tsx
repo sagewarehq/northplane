@@ -15,7 +15,7 @@ export default function TransferOwnership({
 }: TransferOwnershipProps) {
   return (
     <ActionDialog
-      description={`${targetDisplayName} becomes the owner of this Headplane instance and you become an Admin. Only the new owner can transfer it back.`}
+      description={`${targetDisplayName} becomes the owner of this Northplane instance and you become an Admin. Only the new owner can transfer it back.`}
       fields={{ headplane_user_id: targetHeadplaneUserId }}
       intent="transfer"
       isDestructive

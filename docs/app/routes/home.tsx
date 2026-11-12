@@ -25,7 +25,7 @@ const featureList = [
 
 export function meta() {
   return [
-    { title: "Headplane" },
+    { title: "Northplane" },
     {
       name: "description",
       content: "A web UI for Headscale, the self-hosted Tailscale control server.",
@@ -39,7 +39,7 @@ export default function Home() {
       <Header />
       <main className="mx-auto flex w-full max-w-5xl flex-col gap-16 px-6 py-24">
         <div className="flex max-w-2xl flex-col gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight">Headplane</h1>
+          <h1 className="text-4xl font-semibold tracking-tight">Northplane</h1>
           <p className="text-muted text-lg">
             A web UI for Headscale, the self-hosted Tailscale control server.
           </p>

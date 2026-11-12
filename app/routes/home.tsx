@@ -119,7 +119,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               </Button>
             ))}
           </div>
-          <p className="text-muted mt-4 mb-2 text-sm">
+          <p className="text-muted-foreground mt-4 mb-2 text-sm">
             On Linux, use the install script (
             <Link
               external
@@ -134,9 +134,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </Step>
         <Step number={2} title="Sign in to this network">
           <CodeBlock>{`tailscale up --login-server=${server}`}</CodeBlock>
-          <p className="text-muted mt-2 text-sm">
+          <p className="text-muted-foreground mt-2 text-sm">
             Then open the link it prints. In the desktop and mobile apps, set a custom coordination
-            server to <span className="text-fg break-all">{server}</span> instead.
+            server to <span className="text-foreground break-all">{server}</span> instead.
           </p>
         </Step>
       </ol>
@@ -157,7 +157,7 @@ function Step({
 }) {
   return (
     <li className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-3">
-      <span className="border-line-strong text-muted flex size-5 items-center justify-center rounded-full border text-xs font-medium">
+      <span className="border-input text-muted-foreground flex size-5 items-center justify-center rounded-full border text-xs font-medium">
         {number}
       </span>
       <h2 className="font-medium">{title}</h2>
@@ -193,8 +193,8 @@ function LinkStatus({ hasHeadscaleSso, isLinked, linkedName }: LinkStatusProps) 
       <Status
         icon={
           <span className="relative flex size-2">
-            <span className="bg-accent absolute inset-0 animate-ping rounded-full opacity-60 motion-reduce:animate-none" />
-            <span className="bg-accent relative size-2 rounded-full" />
+            <span className="bg-brand absolute inset-0 animate-ping rounded-full opacity-60 motion-reduce:animate-none" />
+            <span className="bg-brand relative size-2 rounded-full" />
           </span>
         }
       >
@@ -219,7 +219,7 @@ function Status({ icon, children }: { icon: React.ReactNode; children: React.Rea
   return (
     <div
       aria-live="polite"
-      className="bg-subtle mt-6 grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-3 rounded-md p-3 text-sm"
+      className="bg-muted mt-6 grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-3 rounded-md p-3 text-sm"
     >
       <span className="flex h-5 items-center justify-center">{icon}</span>
       <div>{children}</div>
@@ -228,5 +228,5 @@ function Status({ icon, children }: { icon: React.ReactNode; children: React.Rea
 }
 
 function Detail({ children }: { children: React.ReactNode }) {
-  return <p className="text-muted mt-0.5">{children}</p>;
+  return <p className="text-muted-foreground mt-0.5">{children}</p>;
 }

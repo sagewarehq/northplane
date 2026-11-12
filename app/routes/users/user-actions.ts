@@ -108,7 +108,7 @@ export const userAction = createAction({
 
         const target = await requireHeadplaneUser(auth, input.headplane_user_id);
         if (target.id === principal.user.id) {
-          throw new ActionError("You already own Headplane.");
+          throw new ActionError("You already own Northplane.");
         }
 
         if (!(await auth.transferOwnership(principal.user.id, input.headplane_user_id))) {

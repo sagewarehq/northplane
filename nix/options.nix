@@ -23,7 +23,7 @@ in {
 
     settings = mkOption {
       description = ''
-        Headplane configuration options. Generates a YAML config file.
+        Northplane configuration options. Generates a YAML config file.
         See: https://github.com/tale/headplane/blob/main/config.example.yaml
       '';
       type = types.submodule {
@@ -54,7 +54,7 @@ in {
                 base_url = mkOption {
                   type = types.str;
                   default = "http://localhost:3000";
-                  description = "The base URL for Headplane, not including the dashboard prefix (/admin) portion";
+                  description = "The base URL for Northplane, not including the dashboard prefix (/admin) portion";
                   example = "http://localhost:3000";
                 };
 
@@ -156,9 +156,9 @@ in {
                           "::1/128"
                         ];
                         description = ''
-                          Direct client CIDR ranges allowed to bypass Headplane's login flow.
+                          Direct client CIDR ranges allowed to bypass Northplane's login flow.
                           These should be the addresses your trusted reverse proxy uses to connect
-                          to Headplane. Requires headscale.api_key_path.
+                          to Northplane. Requires headscale.api_key_path.
                         '';
                         example = ["10.0.0.0/24"];
                       };
@@ -172,7 +172,7 @@ in {
                   type = types.path;
                   default = "/var/lib/headplane";
                   description = ''
-                    The path to persist Headplane specific data.
+                    The path to persist Northplane specific data.
                     All data going forward is stored in this directory, including the internal database and any cache related files.
                     Data formats prior to 0.6.1 will automatically be migrated.
                   '';
@@ -188,7 +188,7 @@ in {
               };
             };
             default = {};
-            description = "Server configuration for Headplane web application.";
+            description = "Server configuration for Northplane web application.";
           };
 
           headscale = mkOption {
@@ -228,7 +228,7 @@ in {
                   description = ''
                     Path to the Headscale configuration file.
                     This is optional, but HIGHLY recommended for the best experience.
-                    If this is read only, Headplane will show your configuration settings
+                    If this is read only, Northplane will show your configuration settings
                     in the Web UI, but they cannot be changed.
                   '';
                   example = "/etc/headscale/config.yaml";
@@ -238,7 +238,7 @@ in {
                   type = types.bool;
                   default = true;
                   description = ''
-                    Deprecated. Headplane no longer validates the complete
+                    Deprecated. Northplane no longer validates the complete
                     Headscale configuration and this option has no effect.
                   '';
                 };
@@ -248,7 +248,7 @@ in {
                   default = null;
                   description = ''
                     Path to a file containing the Headscale API key.
-                    Required for OIDC authentication and the Headplane agent.
+                    Required for OIDC authentication and the Northplane agent.
                   '';
                   example = "config.sops.secrets.headscale_api_key.path";
                 };
@@ -257,16 +257,16 @@ in {
                   type = types.nullOr types.path;
                   default = null;
                   description = ''
-                    If you are using `dns.extra_records_path` in your Headscale configuration, you need to set this to the path for Headplane to be able to read the DNS records.
-                    Ensure that the file is both readable and writable by the Headplane process.
-                    When using this, Headplane will no longer need to automatically restart Headscale for DNS record changes.
+                    If you are using `dns.extra_records_path` in your Headscale configuration, you need to set this to the path for Northplane to be able to read the DNS records.
+                    Ensure that the file is both readable and writable by the Northplane process.
+                    When using this, Northplane will no longer need to automatically restart Headscale for DNS record changes.
                   '';
                   example = "/var/lib/headplane/extra_records.json";
                 };
               };
             };
             default = {};
-            description = "Headscale specific settings for Headplane integration.";
+            description = "Headscale specific settings for Northplane integration.";
           };
 
           integration = mkOption {
@@ -279,7 +279,7 @@ in {
                         type = types.bool;
                         default = false;
                         description = ''
-                          The Headplane agent periodically syncs node information (version, OS, etc.)
+                          The Northplane agent periodically syncs node information (version, OS, etc.)
                           from your Tailnet. It auto-generates ephemeral pre-auth keys using
                           headscale.api_key, so no manual key configuration is needed.
                           Requires Headscale 0.28 or newer.
@@ -305,7 +305,7 @@ in {
                         type = types.path;
                         default = "/usr/libexec/headplane/agent";
                         description = ''
-                          Path to the Headplane agent binary.
+                          Path to the Northplane agent binary.
                           The default is correct if using the NixOS module package.
                         '';
                       };
@@ -316,7 +316,7 @@ in {
                         description = ''
                           Do not change this unless you are running a custom deployment.
                           The work_dir represents where the agent will store its data to be able to automatically reauthenticate with your Tailnet.
-                          It needs to be writable by the user running the Headplane process.
+                          It needs to be writable by the user running the Northplane process.
                         '';
                       };
 
@@ -324,7 +324,7 @@ in {
                         type = types.bool;
                         default = true;
                         description = ''
-                          Use Tailscale's socket-level routing-loop handling in the dedicated Headplane agent process.
+                          Use Tailscale's socket-level routing-loop handling in the dedicated Northplane agent process.
                           Keep enabled unless its fallback pins the agent's Headscale connection to the wrong interface.
                           Set to false only after verifying that ordinary OS routing in the container's network namespace reaches Headscale correctly.
                         '';
@@ -334,7 +334,7 @@ in {
                     };
                   };
                   default = {};
-                  description = "Agent configuration for the Headplane agent.";
+                  description = "Agent configuration for the Northplane agent.";
                 };
 
                 proc = mkOption {
@@ -345,8 +345,8 @@ in {
                         default = true;
                         description = ''
                           Enable "Native" integration that works when Headscale and
-                          Headplane are running outside of a container. There is no additional
-                          configuration, but you need to ensure that the Headplane process
+                          Northplane are running outside of a container. There is no additional
+                          configuration, but you need to ensure that the Northplane process
                           can terminate the Headscale process.
                         '';
                       };
@@ -358,7 +358,7 @@ in {
               };
             };
             default = {};
-            description = "Integration configurations for Headplane to interact with Headscale.";
+            description = "Integration configurations for Northplane to interact with Headscale.";
           };
 
           oidc = mkOption {
@@ -467,7 +467,7 @@ in {
                   type = types.nullOr types.str;
                   default = null;
                   description = ''
-                    Optional OIDC claim containing the Headplane role to assign to newly created users.
+                    Optional OIDC claim containing the Northplane role to assign to newly created users.
                     A valid role claim takes precedence over default_role.
                   '';
                   example = "headplane_role";

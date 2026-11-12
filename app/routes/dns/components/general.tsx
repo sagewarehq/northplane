@@ -42,7 +42,7 @@ export default function General({ baseDomain, isMagicDns, isOverrideDns, isDisab
           {magic.isEnabled ? (
             <span className="font-mono text-xs">[device].{baseDomain}</span>
           ) : (
-            <span className="text-muted">Devices are only reachable by IP</span>
+            <span className="text-muted-foreground">Devices are only reachable by IP</span>
           )}
         </SettingRow>
         <SettingRow
@@ -56,7 +56,7 @@ export default function General({ baseDomain, isMagicDns, isOverrideDns, isDisab
           }
           label="Override local DNS"
         >
-          <span className="text-muted">
+          <span className="text-muted-foreground">
             {override.isEnabled
               ? "Devices send all queries to the nameservers below"
               : "Devices keep their own DNS settings"}

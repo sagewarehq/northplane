@@ -1,7 +1,7 @@
-import { Radio } from "@base-ui/react/radio";
-import { RadioGroup as BaseRadioGroup } from "@base-ui/react/radio-group";
+import type { RadioGroup as BaseRadioGroup } from "@base-ui/react/radio-group";
 import type React from "react";
 
+import { RadioGroup as ShadcnRadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import cn from "~/utils/cn";
 
 interface RadioGroupProps {
@@ -16,13 +16,9 @@ interface RadioGroupProps {
 
 function RadioGroup({ children, label, className, ...props }: RadioGroupProps) {
   return (
-    <BaseRadioGroup
-      {...props}
-      aria-label={label}
-      className={cn("flex flex-col gap-2.5", className)}
-    >
+    <ShadcnRadioGroup {...props} aria-label={label} className={cn("gap-2.5", className)}>
       {children}
-    </BaseRadioGroup>
+    </ShadcnRadioGroup>
   );
 }
 
@@ -37,19 +33,7 @@ interface RadioItemProps {
 function RadioItem({ children, label, className, value, disabled }: RadioItemProps) {
   return (
     <label className="flex items-center gap-2.5">
-      <Radio.Root
-        value={value}
-        disabled={disabled}
-        aria-label={label}
-        className={cn(
-          "size-4 shrink-0 rounded-full border border-line-strong bg-surface",
-          "focus-ring data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
-          "data-[checked]:border-[5px] data-[checked]:border-accent",
-          className,
-        )}
-      >
-        <Radio.Indicator />
-      </Radio.Root>
+      <RadioGroupItem aria-label={label} className={className} disabled={disabled} value={value} />
       {children}
     </label>
   );

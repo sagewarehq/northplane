@@ -66,11 +66,11 @@ export default function TokenList({
   return (
     <div className="flex flex-col gap-2">
       <div>
-        <p className="text-fg text-sm font-medium">{label}</p>
-        {description ? <p className="text-muted text-xs">{description}</p> : null}
+        <p className="text-foreground text-sm font-medium">{label}</p>
+        {description ? <p className="text-muted-foreground text-xs">{description}</p> : null}
       </div>
       {values.length === 0 ? (
-        <p className="text-muted py-2.5 text-sm">{emptyText}</p>
+        <p className="text-muted-foreground py-2.5 text-sm">{emptyText}</p>
       ) : (
         <RowList>
           {values.map((value) => (

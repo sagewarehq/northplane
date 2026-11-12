@@ -1,4 +1,4 @@
-# Headplane
+# Northplane
 
 > A feature-complete web UI for [Headscale](https://headscale.net)
 
@@ -19,12 +19,12 @@
 
 Headscale is the de-facto self-hosted version of Tailscale, a popular Wireguard
 based VPN service. By default, it does not ship with a web UI, which is where
-Headplane comes in. Headplane is a feature-complete web UI for Headscale, allowing
+Northplane comes in. Northplane is a feature-complete web UI for Headscale, allowing
 you to manage your nodes, networks, and ACLs with ease.
 
-Headplane aims to replicate the functionality offered by the official Tailscale
+Northplane aims to replicate the functionality offered by the official Tailscale
 product and dashboard, being one of the most feature complete Headscale UIs available.
-These are some of the features that Headplane offers:
+These are some of the features that Northplane offers:
 
 - Machine management, including expiry, network routing, name, and owner management
 - Access Control List (ACL) and tagging configuration for ACL enforcement
@@ -38,13 +38,13 @@ Refer to the [website](https://headplane.net) for detailed installation instruct
 
 ## Versioning
 
-Headplane uses [semantic versioning](https://semver.org/) for its releases (since v0.6.0).
+Northplane uses [semantic versioning](https://semver.org/) for its releases (since v0.6.0).
 Pre-release builds are available under the `next` tag and get updated when a new release
 PR is opened and actively in testing.
 
 ## Contributing
 
-Headplane is an open-source project and contributions are welcome! If you have
+Northplane is an open-source project and contributions are welcome! If you have
 any suggestions, bug reports, or feature requests, please open an issue. Also
 refer to the [contributor guidelines](./.github/CONTRIBUTING.md) for more info.
 

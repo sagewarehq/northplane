@@ -64,7 +64,7 @@ export default function HeadscaleUserMenu({
       )}
 
       <Menu>
-        <MenuTrigger className="text-muted hover:bg-hover hover:text-fg size-7 rounded-md">
+        <MenuTrigger className="text-muted-foreground hover:bg-accent hover:text-foreground size-7 rounded-md">
           <Ellipsis className="size-4" />
         </MenuTrigger>
         <MenuContent>

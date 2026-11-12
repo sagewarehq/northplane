@@ -6,13 +6,13 @@ import Shell from "~/routes/auth/login/shell";
 export const sshErrors = {
   wasm_missing: {
     title: "Browser SSH isn't available",
-    message: "This build of Headplane doesn't include browser SSH.",
+    message: "This build of Northplane doesn't include browser SSH.",
     anchor: "#ssh-not-available",
   },
 
   agent_required: {
     title: "Browser SSH needs the agent",
-    message: "Turn on the Headplane agent to use browser SSH.",
+    message: "Turn on the Northplane agent to use browser SSH.",
     anchor: "#agent-required",
   },
 
@@ -69,7 +69,7 @@ export function SSHError({ title, message, anchor }: SSHErrorProps) {
           Read the docs
         </Button>
         <Button nativeButton={false} render={<RouterLink reloadDocument to="/" />}>
-          Go to Headplane
+          Go to Northplane
         </Button>
       </div>
     </Shell>

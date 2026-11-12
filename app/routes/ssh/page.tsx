@@ -167,7 +167,7 @@ function BrowserSSHCompatibilityBanner({
   return (
     <div className="fixed inset-x-4 top-4 z-[60] mx-auto max-w-2xl">
       <Callout
-        className="bg-raised"
+        className="bg-popover"
         isDismissable
         variant="warning"
         title={`Browser SSH is broken on Headscale ${warning.version}`}
@@ -259,7 +259,7 @@ function SSHConsole({
         <div className="absolute inset-0 z-50 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
             <Loader2 className="text-faint size-8 animate-spin" />
-            <p className="text-muted text-sm">{status}</p>
+            <p className="text-muted-foreground text-sm">{status}</p>
           </div>
         </div>
       )}

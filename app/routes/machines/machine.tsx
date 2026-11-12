@@ -125,12 +125,12 @@ export default function Page({
 
   return (
     <div className="max-w-5xl">
-      <nav aria-label="Breadcrumb" className="text-muted mb-3 text-sm">
-        <Link className="hover:text-fg" to="/machines">
+      <nav aria-label="Breadcrumb" className="text-muted-foreground mb-3 text-sm">
+        <Link className="hover:text-foreground" to="/machines">
           Machines
         </Link>
         <span className="mx-1.5">/</span>
-        <span className="text-fg">{node.givenName}</span>
+        <span className="text-foreground">{node.givenName}</span>
       </nav>
       <PageHeader
         actions={

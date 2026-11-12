@@ -10,6 +10,9 @@
 
 ## Changes
 
+- Headplane is now called Northplane. The name changes in the interface, the docs and the README. Nothing operators configure changes: the `HEADPLANE_*` environment variables, the config file keys, the container image and the `/admin` path all keep working.
+- The interface is built on shadcn/ui. Buttons, inputs, menus, dialogs, tabs, tables and notices share shadcn's look in light and dark mode, with Northplane's colors.
+- The navigation bar shows which Headscale server Northplane is managing, from `headscale.public_url` (or `headscale.url` when that isn't set), next to the Northplane name.
 - Headplane can be served under a path other than `/admin` by setting `server.base_path`, without building it from source (closes [#637](https://github.com/tale/headplane/issues/637)).
 - Headplane has a new color palette built from its logo: warm greys, black primary buttons, and a muted blue that marks links, focus, and the current page. Dark mode now separates the page, menus, and dialogs by shade so overlays stand out, and secondary text is easier to read in both themes (via [#651](https://github.com/tale/headplane/issues/651)).
 - Dialogs can now be closed by clicking outside them, except the ones that confirm a destructive action like removing a machine.

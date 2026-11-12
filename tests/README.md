@@ -1,6 +1,6 @@
 # Testing
 
-Headplane has two test suites. Both run with [Vitest](https://vitest.dev).
+Northplane has two test suites. Both run with [Vitest](https://vitest.dev).
 
 | Command                 | What it runs                                          | Needs  |
 | ----------------------- | ----------------------------------------------------- | ------ |
@@ -36,7 +36,7 @@ test("peers see a renamed machine", async () => {
   const db = await tailnet.node({ name: "db", user: "alice@" });
 
   const app = await tailnet.headplane();
-  // ...rename web through Headplane, then read db's `tailscale status`
+  // ...rename web through Northplane, then read db's `tailscale status`
 });
 ```
 
@@ -52,7 +52,7 @@ a Node container on the tailnet's network, standing in for the browser
 page does, so they catch problems in the WebAssembly client, Headscale's
 WebSocket and DERP handling, and the SSH rules.
 
-`tailnet.headplane()` runs Headplane in-process against the tailnet, built from
+`tailnet.headplane()` runs Northplane in-process against the tailnet, built from
 the same app context production uses. Sign in as any role and call a route the
 way React Router would:
 
@@ -75,9 +75,9 @@ test("a viewer can't create a tag-only key", async () => {
 });
 ```
 
-`tests/integration/headscale/contract.test.ts` describes what Headplane relies
+`tests/integration/headscale/contract.test.ts` describes what Northplane relies
 on from Headscale's API, including the quirks of each version, and checks it
-through Headplane's own client. `permissions.test.ts` calls every route as each
+through Northplane's own client. `permissions.test.ts` calls every route as each
 role, so a new route is covered as soon as it's added.
 
 The supported Headscale versions live in `tests/harness/versions.ts`. Locally,
@@ -103,7 +103,7 @@ bug report.
 
 ## Docs screenshots
 
-`pnpm harness screenshots` seeds the `homelab` scenario, builds Headplane with
+`pnpm harness screenshots` seeds the `homelab` scenario, builds Northplane with
 the agent and Browser SSH, signs in through Dex as each person, and saves light
 and dark screenshots to `docs/assets`. Install the browser once with
 `pnpm exec playwright install chromium`.

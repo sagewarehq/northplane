@@ -10,7 +10,7 @@ import { ConfigError } from "./config/error";
 import { loadConfig } from "./config/load";
 import { createAppContext, createRouterContext } from "./context";
 
-log.info("server", "Headplane is booting up (PID %d)", process.pid);
+log.info("server", "Northplane is booting up (PID %d)", process.pid);
 log.info("server", "Running Node.js %s", versions.node);
 log.info(
   "server",
@@ -37,7 +37,7 @@ if ((config.server.tls_cert_path || config.server.tls_key_path) && !config.serve
 
 const ctx = await createAppContext(config).catch((error) => {
   const message = error instanceof ConfigError ? error.message : error;
-  log.error("server", "Failed to start Headplane: %s", message);
+  log.error("server", "Failed to start Northplane: %s", message);
   exit(1);
 });
 

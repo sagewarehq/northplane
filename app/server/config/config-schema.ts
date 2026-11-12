@@ -50,7 +50,7 @@ const serverConfig = type({
   cookie_max_age: "number.integer = 86400",
 
   // TLS termination. When both `tls_cert_path` and `tls_key_path`
-  // are provided, Headplane serves HTTPS on `server.port`. When
+  // are provided, Northplane serves HTTPS on `server.port`. When
   // either is set, `cookie_secure` is forced to `true`.
   tls_cert_path: "string?",
   tls_key_path: "string?",

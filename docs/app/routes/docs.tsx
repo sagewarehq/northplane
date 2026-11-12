@@ -31,7 +31,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {
-  const title = { title: `${loaderData.title} | Headplane` };
+  const title = { title: `${loaderData.title} | Northplane` };
   if (!loaderData.description) {
     return [title];
   }

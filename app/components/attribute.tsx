@@ -27,7 +27,7 @@ export default function Attribute({ name, value, tooltip, isCopyable, isMono }: 
         <button
           className={cn(
             "group/copy flex max-w-full min-w-0 items-center gap-1.5 text-left outline-none",
-            "decoration-accent decoration-2 underline-offset-2 focus-visible:underline",
+            "decoration-brand decoration-2 underline-offset-2 focus-visible:underline",
           )}
           onClick={async (event) => {
             const svgs = event.currentTarget.querySelectorAll("svg");
@@ -56,7 +56,7 @@ export default function Attribute({ name, value, tooltip, isCopyable, isMono }: 
           </span>
           <span
             className={cn(
-              "text-muted group-hover/copy:text-fg opacity-0 transition-opacity",
+              "text-muted-foreground group-hover/copy:text-foreground opacity-0 transition-opacity",
               "group-hover/setting:opacity-100 group-focus-visible/copy:opacity-100 pointer-coarse:opacity-100",
             )}
           >

@@ -1,6 +1,6 @@
 # `app/server/`
 
-Server-side application code for Headplane. Everything in this directory
+Server-side application code for Northplane. Everything in this directory
 runs only on the Node process — never in the browser. The patterns every
 service follows are in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
@@ -8,7 +8,7 @@ service follows are in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
 ```
 app/server/
-├── app.ts              ← The Headplane application (load context, RR listener)
+├── app.ts              ← The Northplane application (load context, RR listener)
 ├── main.ts             ← Production bootstrap (binds an http(s) server)
 ├── context.ts          ← createAppContext() — assembles the RouterContextProvider data
 ├── result.ts           ← Result<T, E> helper used across the server modules
@@ -18,7 +18,7 @@ app/server/
 ├── headscale/          ← Headscale REST API client + headscale-config loader
 ├── oidc/               ← OIDC provider abstraction
 ├── web/                ← Authentication service, identity, RBAC capabilities
-└── hp-agent.ts         ← Headplane agent process manager
+└── hp-agent.ts         ← Northplane agent process manager
 ```
 
 ## Entry points
@@ -66,7 +66,7 @@ process:
 
 - the SQLite client (`db`)
 - the Headscale REST interface (`headscale`)
-- the optional Headplane agent manager (`agents`)
+- the optional Northplane agent manager (`agents`)
 - the auth service (`auth`)
 - the optional OIDC service (`oidc`)
 - the live store (`hsLive`)

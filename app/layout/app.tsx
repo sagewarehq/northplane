@@ -125,6 +125,7 @@ export default function AppLayout({ loaderData }: Route.ComponentProps) {
       <Header
         access={loaderData.access}
         configAvailable={loaderData.configAvailable}
+        network={hostOf(loaderData.baseUrl)}
         user={loaderData.user}
       />
       <main className="container mt-4 mb-24 overscroll-contain">
@@ -156,7 +157,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <>
-      <Header access={data.access} configAvailable={data.configAvailable} user={data.user} />
+      <Header
+        access={data.access}
+        configAvailable={data.configAvailable}
+        network={hostOf(data.baseUrl)}
+        user={data.user}
+      />
       <main className="container mt-4 mb-24">
         <PageError error={error} />
       </main>
@@ -164,4 +170,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       <Scrollbar />
     </>
   );
+}
+
+function hostOf(url: string) {
+  try {
+    return new URL(url).host;
+  } catch {
+    return undefined;
+  }
 }

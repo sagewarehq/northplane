@@ -18,7 +18,7 @@ export function describeError(error: unknown): ErrorInfo {
       return {
         kind: "connection",
         title: "Can't reach Headscale",
-        description: "Check that Headscale is running and that Headplane can connect to it.",
+        description: "Check that Headscale is running and that Northplane can connect to it.",
         details: lines(data.requestUrl, data.errorMessage || data.errorCode),
       };
     }
@@ -42,7 +42,7 @@ export function describeError(error: unknown): ErrorInfo {
         return {
           kind: "headscale",
           title: "Headscale rejected the request",
-          description: "Check that the API key in Headplane's config is valid and hasn't expired.",
+          description: "Check that the API key in Northplane's config is valid and hasn't expired.",
           details,
         };
       }
@@ -50,7 +50,7 @@ export function describeError(error: unknown): ErrorInfo {
       return {
         kind: "headscale",
         title: "Unexpected response from Headscale",
-        description: "Headplane may not support this version of Headscale, or this is a bug.",
+        description: "Northplane may not support this version of Headscale, or this is a bug.",
         details,
       };
     }

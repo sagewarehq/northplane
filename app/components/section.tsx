@@ -18,7 +18,7 @@ export default function Section({ title, description, action, children }: Props)
   return (
     <section
       className={cn(
-        "@container border-line -mx-2 border-t px-2 py-8",
+        "@container border-border -mx-2 border-t px-2 py-8",
         "first-of-type:border-t-0 first-of-type:pt-0",
       )}
     >
@@ -26,7 +26,7 @@ export default function Section({ title, description, action, children }: Props)
         <div className="flex min-w-0 flex-col items-start gap-3">
           <div>
             <h2 className="font-semibold">{title}</h2>
-            {description && <p className="text-muted mt-1 text-sm">{description}</p>}
+            {description && <p className="text-muted-foreground mt-1 text-sm">{description}</p>}
           </div>
           {action}
         </div>
@@ -51,7 +51,7 @@ export function RemoveButton({ className, children, ...props }: ButtonProps) {
 }
 
 // Lists bleed into the gutter like Section so their edges line up.
-const listClass = "divide-line -mx-2 divide-y text-sm";
+const listClass = "divide-border -mx-2 divide-y text-sm";
 const rowClass = "flex min-h-11 items-center gap-4 px-2 py-1.5";
 
 interface RowProps {
@@ -89,7 +89,7 @@ export function SettingList({ children }: { children: React.ReactNode }) {
 export function SettingRow({ label, tooltip, action, isMultiline, children }: SettingRowProps) {
   return (
     <div className={cn("group/setting", rowClass, isMultiline && "items-start py-2.5")}>
-      <dt className="text-muted flex w-32 shrink-0 items-center gap-1 sm:w-40">
+      <dt className="text-muted-foreground flex w-32 shrink-0 items-center gap-1 sm:w-40">
         {label}
         {tooltip && (
           <Tooltip content={tooltip}>

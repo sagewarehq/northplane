@@ -27,7 +27,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <PageHeader
-        description="How machines join your tailnet, who can sign in, and the Headplane agent."
+        description="How machines join your tailnet, who can sign in, and the Northplane agent."
         title="Settings"
       />
       <div className="grid gap-x-12 gap-y-6 md:grid-cols-[11rem_minmax(0,1fr)]">
@@ -40,8 +40,8 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
                     cn(
                       "focus-ring flex h-8 items-center rounded-md px-2 text-sm whitespace-nowrap",
                       isActive
-                        ? "bg-subtle text-fg font-medium"
-                        : "text-muted hover:bg-hover hover:text-fg",
+                        ? "bg-muted text-foreground font-medium"
+                        : "text-muted-foreground hover:bg-accent hover:text-foreground",
                     )
                   }
                   prefetch="intent"

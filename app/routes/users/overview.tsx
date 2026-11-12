@@ -59,7 +59,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   const principal = await auth.requireCapability(request, Capabilities.read_users);
   const writablePermission = auth.can(principal, Capabilities.write_users);
 
-  // Primary data: Headplane users from the database (always available)
+  // Primary data: Northplane users from the database (always available)
   const hpUsers = await auth.listUsers();
 
   // Secondary data: Headscale API (may fail)
@@ -118,7 +118,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
     hsUserMap.set(u.id, u);
   }
 
-  // Build the primary user list: Headplane users enriched with Headscale data
+  // Build the primary user list: Northplane users enriched with Headscale data
   const headplaneUsers: HeadplaneUserData[] = hpUsers
     .sort((a, b) => (a.name ?? a.sub).localeCompare(b.name ?? b.sub))
     .map((hp) => {
@@ -197,7 +197,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
         description={
           loaderData.oidc ? (
             <>
-              People who can sign in to Headplane, managed through your{" "}
+              People who can sign in to Northplane, managed through your{" "}
               <Link external styled to={loaderData.oidc.issuer}>
                 OIDC provider
               </Link>
@@ -222,9 +222,9 @@ export default function Page({ loaderData }: Route.ComponentProps) {
       )}
 
       <section>
-        <h2 className="mb-2 font-semibold">Headplane users</h2>
+        <h2 className="mb-2 font-semibold">Northplane users</h2>
         {loaderData.headplaneUsers.length === 0 ? (
-          <p className="text-muted text-sm">No users have signed into Headplane yet.</p>
+          <p className="text-muted-foreground text-sm">No users have signed into Northplane yet.</p>
         ) : (
           <Table>
             <thead>
@@ -259,8 +259,9 @@ export default function Page({ loaderData }: Route.ComponentProps) {
       {!loaderData.apiError && loaderData.unlinkedHeadscaleUsers.length > 0 && (
         <section className="mt-10">
           <h2 className="font-semibold">Unlinked Headscale users</h2>
-          <p className="text-muted mb-2 text-sm">
-            These Headscale users have no Headplane account, so Headplane can't manage their access.
+          <p className="text-muted-foreground mb-2 text-sm">
+            These Headscale users have no Northplane account, so Northplane can't manage their
+            access.
           </p>
           <Table>
             <thead>

@@ -6,7 +6,8 @@ import type { OidcErrorCode } from "~/server/oidc/provider";
 export function OidcDiscoveryFailedNotice() {
   return (
     <Callout className="mb-6" title="Single sign-on is unavailable" variant="warning">
-      Headplane can't reach your identity provider right now. You can still sign in with an API key.
+      Northplane can't reach your identity provider right now. You can still sign in with an API
+      key.
     </Callout>
   );
 }
@@ -78,8 +79,8 @@ function mapOidcErrorsToMessages(errors: OidcErrorCode[]) {
           key: error,
           node: (
             <span>
-              An unknown OIDC configuration error occurred. Please check the Headplane logs for more
-              information.
+              An unknown OIDC configuration error occurred. Please check the Northplane logs for
+              more information.
             </span>
           ),
         });

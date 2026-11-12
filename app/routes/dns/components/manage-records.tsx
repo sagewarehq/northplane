@@ -28,7 +28,7 @@ export default function ManageRecords({ records, hasRecordsFile, isDisabled, isR
           {!isDisabled && isReadOnly && hasRecordsFile && (
             <>
               {" "}
-              To edit records here, give Headplane write access to the file at{" "}
+              To edit records here, give Northplane write access to the file at{" "}
               <Code>dns.extra_records_path</Code>.
             </>
           )}
@@ -44,7 +44,7 @@ export default function ManageRecords({ records, hasRecordsFile, isDisabled, isR
       title="DNS records"
     >
       {records.length === 0 ? (
-        <p className="text-muted py-2.5 text-sm">No DNS records</p>
+        <p className="text-muted-foreground py-2.5 text-sm">No DNS records</p>
       ) : (
         <RowList>
           {records.map((record) => (
@@ -65,7 +65,7 @@ export default function ManageRecords({ records, hasRecordsFile, isDisabled, isR
               <span className="grid grid-cols-1 gap-x-4 font-mono text-xs sm:grid-cols-2">
                 <span className="break-all">{record.name}</span>
                 <span className="break-all">
-                  <span className="text-muted mr-2 inline-block w-8">{record.type}</span>
+                  <span className="text-muted-foreground mr-2 inline-block w-8">{record.type}</span>
                   {record.value}
                 </span>
               </span>

@@ -1,0 +1,145 @@
+/* The theme, as shadcn's color names on Northplane's palette (palette.css), so
+ * components from `shadcn add` drop in unedited. A few extras sit beside them:
+ * `brand` (the link and focus blue), `faint` (the quietest text), the status
+ * colors `ok`, `warn` and `bad` with a `-subtle` tint each, and `backdrop`. */
+
+@theme inline {
+  --color-background: var(--hp-canvas);
+  --color-foreground: var(--hp-fg);
+  --color-card: var(--hp-surface);
+  --color-card-foreground: var(--hp-fg);
+  --color-popover: var(--hp-raised);
+  --color-popover-foreground: var(--hp-fg);
+  --color-primary: var(--hp-ink);
+  --color-primary-foreground: var(--hp-ink-fg);
+  --color-secondary: var(--hp-subtle);
+  --color-secondary-foreground: var(--hp-fg);
+  --color-muted: var(--hp-subtle);
+  --color-muted-foreground: var(--hp-muted);
+  --color-accent: var(--hp-hover);
+  --color-accent-foreground: var(--hp-fg);
+  --color-destructive: var(--hp-danger);
+  --color-border: var(--hp-line);
+  --color-input: var(--hp-line-strong);
+  --color-ring: var(--hp-accent);
+
+  --color-brand: var(--hp-accent);
+  --color-brand-foreground: var(--hp-accent-fg);
+  --color-brand-subtle: var(--hp-accent-subtle);
+  --color-faint: var(--hp-faint);
+  --color-ok: var(--hp-ok);
+  --color-ok-subtle: var(--hp-ok-subtle);
+  --color-warn: var(--hp-warn);
+  --color-warn-subtle: var(--hp-warn-subtle);
+  --color-bad: var(--hp-bad);
+  --color-bad-subtle: var(--hp-bad-subtle);
+  --color-backdrop: var(--hp-backdrop);
+
+  --shadow-overlay: var(--hp-shadow-overlay);
+
+  --color-chart-1: var(--hp-accent);
+  --color-chart-2: var(--hp-ok);
+  --color-chart-3: var(--hp-warn);
+  --color-chart-4: var(--hp-bad);
+  --color-chart-5: var(--hp-faint);
+
+  --color-sidebar: var(--hp-surface);
+  --color-sidebar-foreground: var(--hp-fg);
+  --color-sidebar-primary: var(--hp-ink);
+  --color-sidebar-primary-foreground: var(--hp-ink-fg);
+  --color-sidebar-accent: var(--hp-hover);
+  --color-sidebar-accent-foreground: var(--hp-fg);
+  --color-sidebar-border: var(--hp-line);
+  --color-sidebar-ring: var(--hp-accent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+/* The keyframes and data-attribute variants the components in components/ui
+ * expect, from shadcn's tailwind.css (shadcn 4.22). Base UI sets `data-open`,
+ * `data-orientation` and the rest, and these variants match them. */
+
+@theme inline {
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height, var(--accordion-panel-height, auto));
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height, var(--accordion-panel-height, auto));
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/* Custom variants */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-checked {
+  &:where([data-state="checked"]),
+  &:where([data-checked]:not([data-checked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-unchecked {
+  &:where([data-state="unchecked"]),
+  &:where([data-unchecked]:not([data-unchecked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-selected {
+  &:where([data-selected="true"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-disabled {
+  &:where([data-disabled="true"]),
+  &:where([data-disabled]:not([data-disabled="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-active {
+  &:where([data-state="active"]),
+  &:where([data-active]:not([data-active="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-horizontal {
+  &:where([data-orientation="horizontal"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-vertical {
+  &:where([data-orientation="vertical"]) {
+    @slot;
+  }
+}

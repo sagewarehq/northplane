@@ -3,7 +3,7 @@ import Tooltip from "../tooltip";
 
 export function TailscaleSSHTag() {
   return (
-    <Tooltip content="This machine advertises Tailscale SSH, which allows you to authenticate SSH credentials using your Tailscale account and via the Headplane web UI.">
+    <Tooltip content="This machine advertises Tailscale SSH, which allows you to authenticate SSH credentials using your Tailscale account and via the Northplane web UI.">
       <Chip text="SSH" />
     </Tooltip>
   );

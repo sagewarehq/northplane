@@ -1,6 +1,6 @@
 ---
 title: Users & roles
-description: How Headplane accounts, roles and links to Headscale users work.
+description: How Northplane accounts, roles and links to Headscale users work.
 ---
 
 import usersLight from "../assets/users-light.png";
@@ -14,14 +14,14 @@ import authKeysDark from "../assets/auth-keys-dark.png";
 
 # Users & roles
 
-Headplane keeps its own accounts, separate from Headscale's users. An account is
+Northplane keeps its own accounts, separate from Headscale's users. An account is
 created the first time someone signs in through [SSO](/features/sso) or
 [proxy authentication](/features/proxy-auth). Its role decides what that person
-can do in Headplane, and its link to a Headscale user decides which machines
+can do in Northplane, and its link to a Headscale user decides which machines
 and auth keys are theirs.
 
 <Figure
-  alt="The Users page in Headplane"
+  alt="The Users page in Northplane"
   light={usersLight}
   dark={usersDark}
   caption="Accounts, roles and linked Headscale users"
@@ -70,15 +70,15 @@ create auth keys for themselves, and [Browser SSH](/features/ssh) uses it to
 pick who to connect as.
 
 <Figure
-  alt="Auth keys in Headplane's settings"
+  alt="Auth keys in Northplane's settings"
   light={authKeysLight}
   dark={authKeysDark}
   caption="Each auth key belongs to a Headscale user"
 />
 
-Headplane links an account automatically when it finds an unclaimed Headscale user
+Northplane links an account automatically when it finds an unclaimed Headscale user
 with the same SSO subject or the same email address. It tries when someone
-signs in, and again whenever an unlinked account opens Headplane. So if
+signs in, and again whenever an unlinked account opens Northplane. So if
 Headscale creates users through SSO too, an account links as soon as its first
 device joins. The [SSO page](/features/sso#how-accounts-match-headscale-users)
 covers when subjects match.

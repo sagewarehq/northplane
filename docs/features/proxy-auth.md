@@ -1,17 +1,17 @@
 ---
 title: Proxy authentication
-description: Let a trusted reverse proxy sign people in to Headplane.
+description: Let a trusted reverse proxy sign people in to Northplane.
 ---
 
 # Proxy authentication
 
 With proxy authentication, a reverse proxy that already signs people in, such
-as Authelia, Authentik or nginx with basic auth, tells Headplane who each
+as Authelia, Authentik or nginx with basic auth, tells Northplane who each
 request is from through a header. People then sign in once, at the proxy.
 
 :::warning
-Headplane trusts the identity header from any address allowed below. If anyone
-else can reach Headplane from one of those addresses, they can sign in as
+Northplane trusts the identity header from any address allowed below. If anyone
+else can reach Northplane from one of those addresses, they can sign in as
 anyone. When an OIDC provider is available, [SSO](/features/sso) is the safer
 choice.
 :::
@@ -19,7 +19,7 @@ choice.
 ## Setting it up
 
 Proxy authentication needs
-[`headscale.api_key`](/configuration/api-keys#the-servers-key), which Headplane
+[`headscale.api_key`](/configuration/api-keys#the-servers-key), which Northplane
 uses on behalf of signed-in people:
 
 ```yaml
@@ -38,7 +38,7 @@ server:
 ```
 
 Each request needs `user_header`, `Remote-User` by default. Its value becomes
-the account's identity in Headplane, as `proxy:<value>`, so it has to stay the
+the account's identity in Northplane, as `proxy:<value>`, so it has to stay the
 same for each person. The email, name and `picture_header` headers are
 optional and fill in the profile.
 
@@ -47,14 +47,14 @@ Roles and account linking work as described in
 
 ## Which requests are trusted
 
-Headplane only reads the identity headers on requests from `allowed_cidrs`,
+Northplane only reads the identity headers on requests from `allowed_cidrs`,
 which defaults to localhost. It checks the address of the connection itself,
 not `X-Forwarded-For` or similar headers, so set `allowed_cidrs` to the
 addresses the proxy connects from.
 
 When another proxy sits in front, and the check should use the original
 client's address instead, set `ip_header` to a header the trusted proxy sets
-or overwrites, such as `X-Forwarded-For`. Headplane then reads it only on
+or overwrites, such as `X-Forwarded-For`. Northplane then reads it only on
 connections from `trusted_proxy_cidrs`, also localhost by default, and checks
 the first address in it against `allowed_cidrs`:
 

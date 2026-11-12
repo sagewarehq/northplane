@@ -22,7 +22,7 @@ import sshPromptDark from "../assets/ssh-prompt-dark.png";
 />
 
 Browser SSH opens a terminal to any machine on the tailnet, straight from
-Headplane, with nothing to install. For each session, the browser runs a
+Northplane, with nothing to install. For each session, the browser runs a
 temporary Tailscale node of its own that joins the tailnet and connects to the
 machine with Tailscale SSH.
 
@@ -33,13 +33,13 @@ machine with Tailscale SSH.
 - Tailscale SSH on the target machine, turned on with `tailscale up --ssh`. A
   regular SSH server doesn't work, because the browser signs in through
   Tailscale rather than with a password or key.
-- The [Headplane Agent](/features/agent), turned on.
+- The [Northplane Agent](/features/agent), turned on.
 - An account linked to a Headscale user, since the session connects as that
   user. That takes [SSO](/features/sso) or
   [proxy authentication](/features/proxy-auth); API key sessions can't use
   Browser SSH.
 - Headscale reachable from people's browsers, with WebSocket upgrades
-  forwarded, and CORS headers if Headplane is on another domain. See
+  forwarded, and CORS headers if Northplane is on another domain. See
   [Reverse proxy](/configuration/reverse-proxy).
 
 ## Opening a session
@@ -81,7 +81,7 @@ The agent removes the temporary machines once they go offline.
 
 ### SSH not available
 
-**Error:** "This build of Headplane doesn't include browser SSH."
+**Error:** "This build of Northplane doesn't include browser SSH."
 
 The build is missing the WebAssembly files, `hp_ssh.wasm` and `wasm_exec.js`.
 The official Docker images include them. For a native install, `./build.sh`
@@ -90,10 +90,10 @@ builds only them.
 
 ### Agent required
 
-**Error:** "Turn on the Headplane agent to use browser SSH."
+**Error:** "Turn on the Northplane agent to use browser SSH."
 
 Browser SSH needs the agent to join the tailnet and clean up after sessions.
-See [Headplane Agent](/features/agent).
+See [Northplane Agent](/features/agent).
 
 ### OIDC required
 
@@ -107,7 +107,7 @@ session has none. Sign in with SSO or proxy authentication instead.
 **Error:** "Browser SSH connects as your Headscale user."
 
 The account isn't linked to a Headscale user yet. If Headscale uses SSO too,
-signing in to Headscale from a device creates the user, and Headplane links it
+signing in to Headscale from a device creates the user, and Northplane links it
 automatically. Otherwise, an admin links it from the **Users** page. See
 [Linking by hand](/features/users-roles#linking-by-hand).
 
@@ -120,7 +120,7 @@ removed, so go back to the machine list and open it again.
 
 ### Node offline
 
-Headplane checks that the machine is connected before starting a session. If
+Northplane checks that the machine is connected before starting a session. If
 it isn't, an error page offers **Try again** once the machine is back online.
 
 ### Connection fails or hangs
@@ -130,7 +130,7 @@ it isn't, an error page offers **Try again** once the machine is back online.
 - **`server_url` in Headscale's config** has to include the port when it isn't
   443, such as `https://hs.example.com:8443`, since the embedded DERP server
   advertises its port from it.
-- **Headplane's `headscale.public_url`**, or `headscale.url` when it's unset,
+- **Northplane's `headscale.public_url`**, or `headscale.url` when it's unset,
   is the address the browser connects to, so it has to be Headscale's public
   URL.
 - **The proxy in front of Headscale** has to forward WebSocket upgrades.
@@ -158,7 +158,7 @@ named `*`. Use `autogroup:nonroot` or explicit usernames instead:
 ### Sign in to continue
 
 SSH rules with `"action": "check"` make people sign in again before a session
-opens. Headplane shows a **Sign in** link above the terminal, and the session
+opens. Northplane shows a **Sign in** link above the terminal, and the session
 opens once that sign-in is done. Headscale 0.28 treats `check` like `accept`,
 so this starts with Headscale 0.29.
 

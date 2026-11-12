@@ -49,7 +49,7 @@ export default function ManageNS({ global, split, isDisabled }: Props) {
         </Callout>
       )}
       {rows.length === 0 ? (
-        <p className="text-muted py-2.5 text-sm">
+        <p className="text-muted-foreground py-2.5 text-sm">
           No nameservers. Devices use their own DNS settings.
         </p>
       ) : (

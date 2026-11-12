@@ -9,11 +9,11 @@ import (
 	"time"
 )
 
-// hp_healthcheck pings the Headplane healthz endpoint. It's invoked
+// hp_healthcheck pings the Northplane healthz endpoint. It's invoked
 // from the Docker HEALTHCHECK directive inside the same container
-// as Headplane itself.
+// as Northplane itself.
 //
-// To stay fully zero-config, Headplane writes the exact URL the
+// To stay fully zero-config, Northplane writes the exact URL the
 // healthcheck should hit — scheme, port, and basename included — to
 // listenFile when it starts accepting connections (see
 // runtime/http.ts and app/server/main.ts). This binary just reads

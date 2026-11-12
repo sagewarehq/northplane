@@ -1,7 +1,14 @@
 import { Combobox } from "@base-ui/react/combobox";
-import { Check, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import Field, { controlClass } from "~/components/field";
+import {
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxItem,
+  ComboboxList,
+  useComboboxAnchor,
+} from "~/components/ui/combobox";
 import cn from "~/utils/cn";
 
 export interface SelectItem {
@@ -45,6 +52,8 @@ export default function Select({
   const defaultSelectedItem =
     defaultValue !== undefined ? (items.find((i) => i.value === defaultValue) ?? null) : undefined;
 
+  const anchor = useComboboxAnchor();
+
   return (
     <Field
       className={className}
@@ -62,7 +71,7 @@ export default function Select({
         onValueChange={(item) => onValueChange?.(item?.value ?? null)}
         name={name}
       >
-        <div className={cn(controlClass, "relative")}>
+        <div className={cn(controlClass, "relative")} ref={anchor}>
           <Combobox.Input
             placeholder={placeholder}
             required={required}
@@ -72,51 +81,22 @@ export default function Select({
           <Combobox.Trigger
             className={cn(
               "absolute inset-y-0 right-0 flex items-center pr-2.5",
-              "text-faint hover:text-muted",
+              "text-muted-foreground hover:text-foreground",
             )}
           >
             <ChevronDown className="size-4" />
           </Combobox.Trigger>
         </div>
-        <Combobox.Portal>
-          <Combobox.Positioner
-            className="z-50"
-            sideOffset={8}
-            style={{ width: "var(--anchor-width)" }}
-          >
-            <Combobox.Popup
-              className={cn(
-                "max-h-72 w-full overflow-auto rounded-lg p-1 outline-hidden",
-                "bg-raised border-overlay shadow-overlay",
-              )}
-            >
-              <Combobox.Empty className="text-muted px-3 py-2 text-sm empty:hidden">
-                No results found.
-              </Combobox.Empty>
-              <Combobox.List>
-                {(item: SelectItem) => (
-                  <Combobox.Item
-                    key={item.value}
-                    value={item}
-                    className={cn(
-                      "flex items-center justify-between text-sm",
-                      "h-8 px-2.5 rounded-sm",
-                      "outline-hidden select-none cursor-default",
-                      "data-[highlighted]:bg-hover",
-                      "data-[selected]:font-medium",
-                      "data-[disabled]:text-faint",
-                    )}
-                  >
-                    {item.label}
-                    <Combobox.ItemIndicator>
-                      <Check className="h-3.5 w-3.5" />
-                    </Combobox.ItemIndicator>
-                  </Combobox.Item>
-                )}
-              </Combobox.List>
-            </Combobox.Popup>
-          </Combobox.Positioner>
-        </Combobox.Portal>
+        <ComboboxContent anchor={anchor}>
+          <ComboboxEmpty>No results found.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: SelectItem) => (
+              <ComboboxItem key={item.value} value={item}>
+                {item.label}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
       </Combobox.Root>
     </Field>
   );

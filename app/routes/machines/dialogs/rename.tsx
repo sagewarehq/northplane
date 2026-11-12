@@ -41,7 +41,7 @@ export default function Rename({ machine, magic, isOpen, setIsOpen }: RenameProp
         validate={validateName}
       />
       {magic && isValid && (
-        <p className="text-muted">
+        <p className="text-muted-foreground">
           {name === machine.givenName ? (
             <>
               Reachable at <Code>{machine.givenName}</Code>.

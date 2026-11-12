@@ -41,7 +41,7 @@ export default function UserPrompt({ hostname }: UserPromptProps) {
           Connect
         </Button>
       </Form>
-      <p className="text-muted mt-6 text-sm">
+      <p className="text-muted-foreground mt-6 text-sm">
         Can't connect? See{" "}
         <Link external styled to={`${SSH_DOCS_URL}#troubleshooting`}>
           troubleshooting

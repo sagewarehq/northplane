@@ -35,7 +35,7 @@ export async function createAppContext(config: HeadplaneConfig) {
     certPath: config.headscale.tls_cert_path,
   });
 
-  // TODO: Remove this fallback on Headplane 1.0.0
+  // TODO: Remove this fallback on Northplane 1.0.0
   const headscaleApiKey = config.headscale.api_key ?? config.oidc?.headscale_api_key;
   const agents = await buildAgents(
     config,

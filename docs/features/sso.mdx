@@ -1,6 +1,6 @@
 ---
 title: Single sign-on
-description: Let people sign in to Headplane with an OpenID Connect provider.
+description: Let people sign in to Northplane with an OpenID Connect provider.
 ---
 
 import linkLight from "../assets/link-light.png";
@@ -8,9 +8,9 @@ import linkDark from "../assets/link-dark.png";
 
 # Single sign-on
 
-With single sign-on, people sign in to Headplane through an OpenID Connect
+With single sign-on, people sign in to Northplane through an OpenID Connect
 (OIDC) provider such as Authentik, Keycloak or Google. Each person gets their
-own Headplane account with a [role](/features/users-roles), linked to their
+own Northplane account with a [role](/features/users-roles), linked to their
 Headscale user.
 
 If a reverse proxy already authenticates everyone, [proxy authentication](/features/proxy-auth)
@@ -20,9 +20,9 @@ does the same job without a second sign-in.
 
 SSO needs two settings outside the `oidc` section:
 
-- `server.base_url`, the public URL Headplane is reached at, such as
+- `server.base_url`, the public URL Northplane is reached at, such as
   `https://headscale.example.com`
-- `headscale.api_key`, a long-lived key Headplane uses on behalf of signed-in
+- `headscale.api_key`, a long-lived key Northplane uses on behalf of signed-in
   people. See [API keys](/configuration/api-keys#the-servers-key).
 
 ### 1. Create a client
@@ -39,12 +39,12 @@ replace `/admin` with that path.
 
 If Headscale already signs people in through the same provider, add the URI to
 Headscale's client instead of creating a new one. With one shared client, the
-provider gives each person the same ID in both places, so Headplane can link
+provider gives each person the same ID in both places, so Northplane can link
 accounts to Headscale users automatically.
 
-### 2. Configure Headplane
+### 2. Configure Northplane
 
-Add the client's details to Headplane's config:
+Add the client's details to Northplane's config:
 
 ```yaml
 oidc:
@@ -53,7 +53,7 @@ oidc:
   client_secret: "<client secret>"
 ```
 
-Headplane finds the provider's endpoints from the issuer's
+Northplane finds the provider's endpoints from the issuer's
 `/.well-known/openid-configuration`. The [providers](#providers) table lists
 the issuer URL for common providers. To keep the secret out of the config file,
 use `client_secret_path`, as described in
@@ -61,7 +61,7 @@ use `client_secret_path`, as described in
 
 ### 3. Sign in
 
-Restart Headplane and choose **Continue with SSO** on the sign-in page. The
+Restart Northplane and choose **Continue with SSO** on the sign-in page. The
 first person to sign in becomes the owner, so whoever set it up should sign in
 before sharing the link.
 
@@ -96,7 +96,7 @@ A few need extra settings:
 
 Each account is linked to a Headscale user, as described in
 [Users & roles](/features/users-roles#linking-to-headscale-users). For SSO
-accounts, Headplane tries two matches in order:
+accounts, Northplane tries two matches in order:
 
 1. **Subject**: Headscale stores each OIDC user's `provider_id`, such as
    `https://idp.example.com/3d6f6e3f-...`. Its last path segment is compared
@@ -115,7 +115,7 @@ headscale users create alice --email alice@example.com
 
 ### Same client or separate clients
 
-Sharing one OIDC client between Headscale and Headplane is the most reliable
+Sharing one OIDC client between Headscale and Northplane is the most reliable
 setup, since the subject is then always identical.
 
 With separate clients, some providers, notably Entra ID, issue a different
@@ -154,10 +154,10 @@ oidc:
 ```
 
 This fits when Headscale already limits who can sign in, for example to one
-email domain, and everyone allowed in should be able to view Headplane.
+email domain, and everyone allowed in should be able to view Northplane.
 
 For a role per person, set `oidc.role_claim` to a claim the provider fills
-with a Headplane role, as a string such as `"admin"` or an array that contains
+with a Northplane role, as a string such as `"admin"` or an array that contains
 one. In Keycloak or Authentik, map a group or client role to that claim.
 
 ```yaml
@@ -166,16 +166,16 @@ oidc:
 ```
 
 A valid role claim wins over `default_role`, and it's applied again at every
-sign-in, so a change at the provider reaches Headplane the next time that
+sign-in, so a change at the provider reaches Northplane the next time that
 person signs in. `default_role` only applies when an account is created.
 Neither setting can grant or remove the owner role.
 
 ## Signing out of the provider
 
-By default, signing out only ends the Headplane session, and the provider still
+By default, signing out only ends the Northplane session, and the provider still
 considers the person signed in. With `oidc.use_end_session: true`, signing out
 also sends the browser to the provider's sign-out page, which then returns to
-Headplane.
+Northplane.
 
 ```yaml
 oidc:
@@ -204,10 +204,10 @@ advertise its sign-out page through discovery, set
 
 ## Troubleshooting
 
-The sign-in page shows what went wrong, and Headplane's logs have the details.
+The sign-in page shows what went wrong, and Northplane's logs have the details.
 
-- **"Single sign-on is unavailable"**: Headplane can't reach the issuer. Check
-  that the issuer URL is right and reachable from Headplane's server or
+- **"Single sign-on is unavailable"**: Northplane can't reach the issuer. Check
+  that the issuer URL is right and reachable from Northplane's server or
   container. It retries on the next sign-in.
 - **"Single sign-on is misconfigured"**: the page lists the cause. Usually
   `headscale.api_key` is invalid or expired (see

@@ -1,15 +1,18 @@
 import { CircleAlert, Info, TriangleAlert, X } from "lucide-react";
 import React, { useState } from "react";
 
+import { Alert, AlertAction, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Button } from "~/components/ui/button";
 import cn from "~/utils/cn";
 
 type Variant = "neutral" | "info" | "warning" | "error";
 
-const variants: Record<Variant, { box: string; icon: string; Icon: typeof Info }> = {
-  neutral: { box: "border-line bg-subtle", icon: "text-muted", Icon: Info },
-  info: { box: "border-accent/25 bg-accent-subtle", icon: "text-accent", Icon: Info },
-  warning: { box: "border-warn/25 bg-warn-subtle", icon: "text-warn", Icon: TriangleAlert },
-  error: { box: "border-bad/25 bg-bad-subtle", icon: "text-bad", Icon: CircleAlert },
+// shadcn's Alert, with a tone for each kind of notice.
+const variants: Record<Variant, { className: string; Icon: typeof Info }> = {
+  neutral: { className: "*:[svg]:text-muted-foreground", Icon: Info },
+  info: { className: "border-brand/25 bg-brand-subtle *:[svg]:text-brand", Icon: Info },
+  warning: { className: "border-warn/25 bg-warn-subtle *:[svg]:text-warn", Icon: TriangleAlert },
+  error: { className: "border-bad/25 bg-bad-subtle *:[svg]:text-bad", Icon: CircleAlert },
 };
 
 export interface CalloutProps {
@@ -34,29 +37,28 @@ export default function Callout({
     return null;
   }
 
-  const { box, icon: iconClass, Icon } = variants[variant];
+  const { className: tone, Icon } = variants[variant];
   const isUrgent = variant === "warning" || variant === "error";
 
   return (
-    <div
-      className={cn("flex items-start gap-2.5 rounded-lg border px-3.5 py-3", box, className)}
-      role={isUrgent ? "alert" : "status"}
-    >
-      <span className={cn("mt-0.5 shrink-0 [&>svg]:size-4", iconClass)}>{icon ?? <Icon />}</span>
-      <div className="min-w-0 flex-1">
-        {title && <p className="font-medium">{title}</p>}
-        {children && <div className={cn(title && "mt-0.5 text-muted")}>{children}</div>}
-      </div>
-      {isDismissable && (
-        <button
-          aria-label="Dismiss"
-          className="focus-ring text-muted hover:text-fg -m-0.5 shrink-0 rounded-sm p-0.5"
-          onClick={() => setIsDismissed(true)}
-          type="button"
-        >
-          <X className="size-4" />
-        </button>
+    <Alert className={cn(tone, className)} role={isUrgent ? "alert" : "status"}>
+      {icon ?? <Icon />}
+      {title && <AlertTitle>{title}</AlertTitle>}
+      {children && (
+        <AlertDescription className={cn(!title && "text-foreground")}>{children}</AlertDescription>
       )}
-    </div>
+      {isDismissable && (
+        <AlertAction>
+          <Button
+            aria-label="Dismiss"
+            onClick={() => setIsDismissed(true)}
+            size="icon-xs"
+            variant="ghost"
+          >
+            <X />
+          </Button>
+        </AlertAction>
+      )}
+    </Alert>
   );
 }

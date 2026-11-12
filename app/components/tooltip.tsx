@@ -1,7 +1,6 @@
-import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
 import type { ReactNode } from "react";
 
-import cn from "~/utils/cn";
+import { Tooltip as ShadcnTooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
 
 export interface TooltipProps {
   children: ReactNode;
@@ -11,29 +10,15 @@ export interface TooltipProps {
 
 export default function Tooltip({ children, content, className }: TooltipProps) {
   return (
-    <BaseTooltip.Root>
-      <BaseTooltip.Trigger
-        delay={0}
+    <ShadcnTooltip>
+      <TooltipTrigger
+        className="focus-visible:ring-ring/50 inline-flex items-center justify-center rounded-md outline-none focus-visible:ring-3"
         closeDelay={0}
-        className={cn("inline-flex items-center justify-center rounded-md", "focus-ring")}
+        delay={0}
       >
         {children}
-      </BaseTooltip.Trigger>
-      <BaseTooltip.Portal>
-        <BaseTooltip.Positioner side="top" sideOffset={4} collisionPadding={8}>
-          <BaseTooltip.Popup
-            className={cn(
-              "z-50 rounded-lg p-3 text-sm w-48",
-              "outline-hidden",
-              "bg-raised text-fg",
-              "shadow-overlay border-overlay",
-              className,
-            )}
-          >
-            {content}
-          </BaseTooltip.Popup>
-        </BaseTooltip.Positioner>
-      </BaseTooltip.Portal>
-    </BaseTooltip.Root>
+      </TooltipTrigger>
+      <TooltipContent className={className}>{content}</TooltipContent>
+    </ShadcnTooltip>
   );
 }

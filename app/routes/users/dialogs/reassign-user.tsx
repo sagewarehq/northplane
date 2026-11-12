@@ -27,7 +27,7 @@ export default function ReassignUser({
     <ActionDialog
       description={
         <>
-          Roles decide what the user can access in Headplane.{" "}
+          Roles decide what the user can access in Northplane.{" "}
           <Link external styled to="https://tailscale.com/kb/1138/user-roles">
             Docs
           </Link>
@@ -56,7 +56,7 @@ export default function ReassignUser({
               <RadioGroup.Radio key={r} label={name} value={r}>
                 <div>
                   <p className="font-medium">{name}</p>
-                  <p className="text-muted">{desc}</p>
+                  <p className="text-muted-foreground">{desc}</p>
                 </div>
               </RadioGroup.Radio>
             );

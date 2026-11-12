@@ -1,11 +1,11 @@
 ---
 title: Configuration
-description: Configure Headplane with its config file and environment variables.
+description: Configure Northplane with its config file and environment variables.
 ---
 
 # Configuration
 
-Headplane reads its settings from a YAML file, `/etc/headplane/config.yaml`
+Northplane reads its settings from a YAML file, `/etc/headplane/config.yaml`
 unless `HEADPLANE_CONFIG_PATH` points somewhere else. The
 [example configuration](https://github.com/tale/headplane/blob/main/config.example.yaml)
 documents every option. Only `headscale.url` and `server.cookie_secret` are
@@ -15,9 +15,9 @@ Upgrading from an older version? See [Upgrading](/upgrading) for what changed.
 
 ## Data directory
 
-Headplane keeps its database and the agent's state in `server.data_path`,
+Northplane keeps its database and the agent's state in `server.data_path`,
 `/var/lib/headplane` by default. It must be persistent and writable by
-Headplane. In Docker, mount it as a volume.
+Northplane. In Docker, mount it as a volume.
 
 ## Environment variables
 
@@ -33,7 +33,7 @@ uppercase it and prefix it with `HEADPLANE_`:
 | `oidc.client_secret` | `HEADPLANE_OIDC__CLIENT_SECRET` |
 
 `true`, `false` and numbers are converted to their types. If no config file
-exists at all, Headplane runs on environment variables alone.
+exists at all, Northplane runs on environment variables alone.
 
 :::note
 Older versions only read these when `HEADPLANE_LOAD_ENV_OVERRIDES` was set, and
@@ -45,7 +45,7 @@ Secrets can also come from a file instead of the config or the environment. See 
 
 ## Debug logging
 
-Headplane logs newline-delimited JSON, with a timestamp, level, component and
+Northplane logs newline-delimited JSON, with a timestamp, level, component and
 message on each line, so log tools can index it directly. Set
 `HEADPLANE_DEBUG_LOG=true` for debug logs. They're verbose, so avoid leaving
 them on in production.

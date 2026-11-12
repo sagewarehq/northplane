@@ -39,14 +39,14 @@ export default function Routes({ node, isOpen, setIsOpen }: RoutesProps) {
       <DialogTitle>Routes for {node.givenName}</DialogTitle>
       <section className="flex flex-col gap-2">
         <h3 className="font-medium">Subnet routes</h3>
-        <p className="text-muted">
+        <p className="text-muted-foreground">
           Reach devices that can&apos;t run Tailscale through IP ranges this machine advertises.{" "}
           <Link external styled to="https://tailscale.com/kb/1019/subnets">
             Docs
           </Link>
         </p>
         {subnets.length === 0 ? (
-          <p className="text-muted py-2.5 text-sm">
+          <p className="text-muted-foreground py-2.5 text-sm">
             This machine doesn&apos;t advertise any routes
           </p>
         ) : (
@@ -70,14 +70,14 @@ export default function Routes({ node, isOpen, setIsOpen }: RoutesProps) {
       </section>
       <section className="flex flex-col gap-2">
         <h3 className="font-medium">Exit node</h3>
-        <p className="text-muted">
+        <p className="text-muted-foreground">
           Let devices send their internet traffic through this machine.{" "}
           <Link external styled to="https://tailscale.com/kb/1103/exit-nodes">
             Docs
           </Link>
         </p>
         {node.customRouting.exitRoutes.length === 0 ? (
-          <p className="text-muted py-2.5 text-sm">
+          <p className="text-muted-foreground py-2.5 text-sm">
             This machine isn&apos;t advertised as an exit node
           </p>
         ) : (

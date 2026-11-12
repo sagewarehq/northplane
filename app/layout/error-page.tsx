@@ -22,7 +22,7 @@ export default function ErrorPage({ error }: { error: unknown }) {
           render={<RouterLink reloadDocument to="/" />}
           variant={canRetry ? "secondary" : "primary"}
         >
-          Go to Headplane
+          Go to Northplane
         </Button>
         {info.kind === "unknown" && (
           <span className="ml-1 text-sm">

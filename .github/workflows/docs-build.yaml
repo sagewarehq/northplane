@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # A hotfix keeps the label of the release it fixes, since Headplane
+      # A hotfix keeps the label of the release it fixes, since Northplane
       # itself didn't change.
       - name: Find the release
         id: release

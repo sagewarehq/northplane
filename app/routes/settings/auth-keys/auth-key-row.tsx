@@ -21,7 +21,7 @@ export default function AuthKeyRow({ authKey, user }: Props) {
     <tr>
       <TableCell>
         <div className="font-mono text-xs break-all">{authKey.key}</div>
-        <div className="text-muted mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+        <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
           {authKey.aclTags.map((tag) => (
             <span className="font-mono" key={tag}>
               {tag}
@@ -32,17 +32,17 @@ export default function AuthKeyRow({ authKey, user }: Props) {
         </div>
       </TableCell>
       <TableCell>
-        {user ? getUserDisplayName(user) : <span className="text-muted">Tags only</span>}
+        {user ? getUserDisplayName(user) : <span className="text-muted-foreground">Tags only</span>}
       </TableCell>
       <TableCell
-        className={isPastExpiry ? "text-muted whitespace-nowrap" : "whitespace-nowrap"}
+        className={isPastExpiry ? "text-muted-foreground whitespace-nowrap" : "whitespace-nowrap"}
         suppressHydrationWarning
         title={expiration.toLocaleString()}
       >
         {isPastExpiry ? `Expired ${formatTimeDelta(expiration)}` : formatTimeUntil(expiration)}
       </TableCell>
       <TableCell
-        className="text-muted whitespace-nowrap"
+        className="text-muted-foreground whitespace-nowrap"
         suppressHydrationWarning
         title={createdAt.toLocaleString()}
       >

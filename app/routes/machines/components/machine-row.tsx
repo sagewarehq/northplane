@@ -72,12 +72,12 @@ export default function MachineRow({
     <tr className="group">
       <TableCell>
         <Link className="group/link focus-ring rounded-sm" to={`/machines/${node.id}`}>
-          <span className="group-hover/link:text-accent flex items-center gap-2 font-medium">
+          <span className="group-hover/link:text-brand flex items-center gap-2 font-medium">
             <StatusCircle isExpired={node.expired} isOnline={isConnected} />
             {node.givenName}
           </span>
         </Link>
-        <div className="text-muted mt-0.5 ml-[15px] flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+        <div className="text-muted-foreground mt-0.5 ml-[15px] flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
           {node.user && !(isTaggedDevicesUser(node.user) && node.tags?.length) ? (
             <span>{getUserDisplayName(node.user)}</span>
           ) : undefined}
@@ -91,14 +91,14 @@ export default function MachineRow({
       </TableCell>
       <TableCell>
         <Menu>
-          <MenuTrigger className="hover:bg-hover -mx-1 -my-0.5 cursor-pointer flex-col items-start rounded-sm px-1 py-0.5 font-mono text-xs leading-5">
+          <MenuTrigger className="hover:bg-accent -mx-1 -my-0.5 cursor-pointer flex-col items-start rounded-sm px-1 py-0.5 font-mono text-xs leading-5">
             {ipv4 ? (
               <span className="flex items-center gap-1.5">
                 {ipv4.value}
-                <Copy className="text-muted size-3 opacity-0 transition-opacity group-hover:opacity-100 [@media(hover:none)]:opacity-100" />
+                <Copy className="text-muted-foreground size-3 opacity-0 transition-opacity group-hover:opacity-100 [@media(hover:none)]:opacity-100" />
               </span>
             ) : undefined}
-            {ipv6 ? <span className="text-muted">{ipv6.value}</span> : undefined}
+            {ipv6 ? <span className="text-muted-foreground">{ipv6.value}</span> : undefined}
           </MenuTrigger>
           <MenuContent>
             {addresses.map(({ label, value }) => (
@@ -111,10 +111,10 @@ export default function MachineRow({
               >
                 <div className="flex w-full items-center justify-between gap-x-6">
                   <div>
-                    <p className="text-muted text-xs">{label}</p>
+                    <p className="text-muted-foreground text-xs">{label}</p>
                     <p className="font-mono text-sm">{value}</p>
                   </div>
-                  <Copy className="text-muted size-3.5" />
+                  <Copy className="text-muted-foreground size-3.5" />
                 </div>
               </MenuItem>
             ))}
@@ -140,10 +140,12 @@ export default function MachineRow({
                   </Tooltip>
                 ) : undefined}
               </p>
-              <p className="text-muted max-w-48 truncate">{hinfo.getOSInfo(node.hostInfo)}</p>
+              <p className="text-muted-foreground max-w-48 truncate">
+                {hinfo.getOSInfo(node.hostInfo)}
+              </p>
             </>
           ) : (
-            <p className="text-muted">Unknown</p>
+            <p className="text-muted-foreground">Unknown</p>
           )}
         </TableCell>
       ) : undefined}
@@ -152,7 +154,7 @@ export default function MachineRow({
           <span className="text-ok">Connected</span>
         ) : (
           <span
-            className="text-muted"
+            className="text-muted-foreground"
             suppressHydrationWarning
             title={new Date(node.lastSeen).toLocaleString()}
           >

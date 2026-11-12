@@ -13,7 +13,7 @@ export default function LogoMark({ className }: { className?: string }) {
       {LOGO.flatMap((row, y) =>
         row.map((isOn, x) => (
           <circle
-            className={isOn ? "fill-fg" : "fill-line-strong"}
+            className={isOn ? "fill-foreground" : "fill-input"}
             cx={7.5 + x * 7.5}
             cy={7.5 + y * 7.5}
             key={`${x}-${y}`}

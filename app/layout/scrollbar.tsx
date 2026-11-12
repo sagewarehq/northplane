@@ -25,7 +25,7 @@ export default function Scrollbar() {
     >
       <div
         className={cn(
-          "bg-line-strong absolute right-0.5 w-1.5 cursor-default rounded-full",
+          "bg-input absolute right-0.5 w-1.5 cursor-default rounded-full",
           "transition-[width] duration-100 group-hover/scrollbar:w-2",
         )}
         data-thumb

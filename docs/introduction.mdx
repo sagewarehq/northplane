@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: What is Headplane?
+description: What is Northplane?
 ---
 
 import previewLight from "./assets/preview-light.png";
@@ -12,40 +12,40 @@ import machineDark from "./assets/machine-dark.png";
 import routesLight from "./assets/routes-light.png";
 import routesDark from "./assets/routes-dark.png";
 
-# What is Headplane?
+# What is Northplane?
 
 [Headscale](https://headscale.net) is a self-hosted implementation of the
 Tailscale control server: it lets Tailscale clients form a private network
-without Tailscale's servers. It doesn't come with a web interface, and Headplane
+without Tailscale's servers. It doesn't come with a web interface, and Northplane
 is one, modeled on Tailscale's admin console.
 
 <Figure
-  alt="Headplane Dashboard"
+  alt="Northplane Dashboard"
   light={previewLight}
   dark={previewDark}
-  caption="Headplane Dashboard"
+  caption="Northplane Dashboard"
 />
 
-Headplane manages:
+Northplane manages:
 
 - **Machines**: rename them, change their owner, approve routes and exit nodes,
   manage tags, and expire or remove them
-- **Users and auth keys**, including what each person can do in Headplane
+- **Users and auth keys**, including what each person can do in Northplane
 - **Access control**: edit the ACL policy visually or as a file
 - **DNS**: the tailnet name, Magic DNS, nameservers, search domains and records
 
 <Figure
-  alt="Approving a machine's routes in Headplane"
+  alt="Approving a machine's routes in Northplane"
   light={routesLight}
   dark={routesDark}
   caption="Approving a subnet route and exit node"
 />
 
 <Figure
-  alt="DNS management in Headplane"
+  alt="DNS management in Northplane"
   light={dnsLight}
   dark={dnsDark}
-  caption="DNS management in Headplane"
+  caption="DNS management in Northplane"
 />
 
 It also adds features Headscale doesn't have:
@@ -53,19 +53,19 @@ It also adds features Headscale doesn't have:
 - **Single sign-on** through any OpenID Connect provider, or through a
   reverse proxy, with roles for each person
 - **Browser SSH** into any machine on the tailnet, with no client installed
-- **The Headplane Agent**, which shows each machine's Tailscale version, OS and
+- **The Northplane Agent**, which shows each machine's Tailscale version, OS and
   connectivity
 
 <Figure
-  alt="Machine management in Headplane"
+  alt="Machine management in Northplane"
   light={machineLight}
   dark={machineDark}
-  caption="Machine management in Headplane"
+  caption="Machine management in Northplane"
 />
 
 ## How it connects
 
-Headplane is a separate server that runs next to Headscale. It reaches
+Northplane is a separate server that runs next to Headscale. It reaches
 Headscale three ways, and each one unlocks part of the UI:
 
 <Architecture />
@@ -75,4 +75,4 @@ Only the API is required. Access to Headscale's config file is covered under
 [its own page](/features/agent).
 
 To get started, follow the [Quickstart](/quickstart) for a new server, or
-[Installation](/install) to add Headplane to an existing Headscale.
+[Installation](/install) to add Northplane to an existing Headscale.

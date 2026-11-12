@@ -25,7 +25,7 @@ export default function Architecture() {
   return (
     <figure className="not-prose border-line bg-subtle my-6 grid gap-3 rounded-lg border p-4 sm:grid-cols-[7rem_1fr] sm:p-5">
       <div className="border-line-strong bg-surface text-fg flex items-center justify-center rounded-md border py-3 text-sm font-semibold">
-        Headplane
+        Northplane
       </div>
       <ul className="grid gap-3">
         {channelList.map((channel) => (

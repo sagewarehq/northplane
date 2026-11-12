@@ -1,22 +1,29 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import type React from "react";
 
+import {
+  Table as ShadcnTable,
+  TableBody as ShadcnTableBody,
+  TableCell as ShadcnTableCell,
+  TableHead,
+} from "~/components/ui/table";
 import cn from "~/utils/cn";
 
+// shadcn's Table, with rows written as plain `<tr>` by the callers.
 export function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div className="-mx-2 overflow-x-auto">
-      <table {...props} className={cn("w-full min-w-160 border-collapse text-sm", className)} />
+    <div className="-mx-2">
+      <ShadcnTable {...props} className={cn("min-w-160 whitespace-normal", className)} />
     </div>
   );
 }
 
 export function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
-    <tbody
+    <ShadcnTableBody
       {...props}
       className={cn(
-        "align-top [&>tr]:border-t [&>tr]:border-line [&>tr:hover]:bg-subtle",
+        "align-top [&>tr]:border-t [&>tr]:transition-colors [&>tr:hover]:bg-muted/50",
         className,
       )}
     />
@@ -24,19 +31,11 @@ export function TableBody({ className, ...props }: React.ComponentProps<"tbody">
 }
 
 export function TableHeader({ className, ...props }: React.ComponentProps<"th">) {
-  return (
-    <th
-      {...props}
-      className={cn(
-        "h-9 px-2 text-left text-xs font-medium whitespace-nowrap text-muted",
-        className,
-      )}
-    />
-  );
+  return <TableHead {...props} className={cn("text-muted-foreground h-9", className)} />;
 }
 
 export function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return <td {...props} className={cn("px-2 py-2.5", className)} />;
+  return <ShadcnTableCell {...props} className={cn("py-2.5 whitespace-normal", className)} />;
 }
 
 export type SortDirection = "asc" | "desc";
@@ -70,7 +69,7 @@ export function SortHeader<T extends string>({
       aria-sort={isActive ? (sortDirection === "asc" ? "ascending" : "descending") : "none"}
     >
       <button
-        className="focus-ring hover:text-fg -mx-1 inline-flex items-center gap-1 rounded-sm px-1 align-middle"
+        className="focus-visible:ring-ring/50 hover:text-foreground -mx-1 inline-flex items-center gap-1 rounded-sm px-1 align-middle outline-none focus-visible:ring-3"
         onClick={() => onSort(field)}
         type="button"
       >
