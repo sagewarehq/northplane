@@ -144,7 +144,8 @@ All container setup goes through the harness, built on `testcontainers`.
   (`tests/support/app.ts`).
 - Supported Headscale versions and the pinned Tailscale and Dex images live only
   in `versions.ts`. Never hardcode a version in a test; use `testedVersions()`.
-  Locally only the latest runs; CI sets `HP_HEADSCALE_VERSIONS=all`.
+  Locally and on pull requests only the latest runs; pushes to `main` and a
+  weekly CI run set every supported version.
 - If you need a container the harness can't create yet, add it to the harness.
   Don't start containers ad hoc in test files.
 - Scenarios in `scenarios/` are declarative seed data (users, nodes, policy,
@@ -194,17 +195,11 @@ that minor's patches are cut from there.
 - Cut patches on the release branch with `pnpm release cut X.Y.Z`, then push
   that branch with `--follow-tags` (not `main`).
 - Copy the released `# X.Y.Z` section into `main`'s `CHANGELOG.md` below
-  `# Next`, so the beta docs keep the full history.
+  `# Next`, so `main` keeps the full history.
 - Once the next minor ships, only security and serious regression fixes are
   backported. New features never are.
 
-### Docs versions
+### Docs deployment
 
-headplane.net serves the newest release line at the root and every older line
-under `/X.Y/`, assembled from docs archives attached to each line's newest
-release. `main` deploys the separate beta docs.
-
-- Each stable release builds and attaches its docs, then republishes the site.
-- Docs fixes for a released version go to its `release/X.Y` branch. Pushing
-  docs changes there rebuilds that line's archives under its newest release and
-  republishes, without a new release.
+The docs site isn't deployed anywhere yet; run it locally with `pnpm docs:dev`.
+Docs fixes for a released version still go to its `release/X.Y` branch.

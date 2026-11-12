@@ -81,9 +81,9 @@ through Northplane's own client. `permissions.test.ts` calls every route as each
 role, so a new route is covered as soon as it's added.
 
 The supported Headscale versions live in `tests/harness/versions.ts`. Locally,
-integration tests run against the latest one. Set
-`HP_HEADSCALE_VERSIONS=all` (as CI does) or a comma-separated list to run
-others.
+integration tests run against the latest one, as they do on pull requests. Set
+`HP_HEADSCALE_VERSIONS=all` (as CI does on `main` and weekly) or a
+comma-separated list to run others.
 
 ## Scenarios
 
