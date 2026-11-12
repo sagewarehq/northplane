@@ -403,7 +403,7 @@ export async function takeScreenshots(version: HeadscaleVersion, port: number) {
 
     // Cropped to the form, since the animated grid beside it is random.
     await page.goto(`${base}/login`);
-    const heading = page.getByRole("heading", { name: "Sign in to Headplane" });
+    const heading = page.getByRole("heading", { name: "Sign in to Northplane" });
     const signIn = page.getByRole("button", { name: "Sign in" });
     await shoot(page, replace, "login-banner", { clip: () => around(heading, signIn) });
 

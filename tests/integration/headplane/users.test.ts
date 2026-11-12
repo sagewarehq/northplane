@@ -191,7 +191,7 @@ describe("transferring ownership", () => {
 
   test("refuses a transfer to yourself or to an account that's gone", async () => {
     expect(await act({ intent: "transfer", headplane_user_id: owner.userId })).toMatchObject({
-      data: { errors: { form: "You already own Headplane." } },
+      data: { errors: { form: "You already own Northplane." } },
     });
     expect(statusOf(await act({ intent: "transfer", headplane_user_id: "missing" }))).toBe(404);
     expect((await headplaneUser(owner.userId))?.role).toBe("owner");
