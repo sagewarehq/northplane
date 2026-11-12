@@ -1,5 +1,7 @@
 # Next
 
+# 0.9.0 (November 12, 2026)
+
 ## Upgrading
 
 - DNS records are only read from and written to the file in Headscale's `dns.extra_records_path`. Records listed inline under `dns.extra_records` show as read-only, so move them into the file to keep editing them.
@@ -77,6 +79,8 @@
 - Browser SSH works with SSH rules that use the `check` action on Headscale 0.29. The page links to the sign-in Headscale asks for, and the session opens once it's done (closes [#591](https://github.com/tale/headplane/issues/591)).
 - Browser SSH no longer opens a second SSH session right after the first one connects.
 - Browser SSH no longer says it isn't available when Headplane can't reach its own public address, as happens behind some reverse proxies. The page checks for its files when it loads them instead.
+
+---
 
 # 0.8.1 (October 16, 2026)
 
