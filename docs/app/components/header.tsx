@@ -34,7 +34,7 @@ export default function Header({ menu }: { menu?: ReactNode }) {
       <div className="flex h-full items-center gap-x-5 px-4 md:px-6">
         <Link className="flex items-center gap-x-2" to="/">
           <LogoMark className="size-[18px] shrink-0" />
-          <span className="text-sm font-semibold tracking-tight">headplane</span>
+          <span className="text-sm font-semibold tracking-tight">Northplane</span>
         </Link>
         <nav className="hidden items-center gap-x-0.5 text-[13px] font-medium md:flex">
           {links.map((link) => {

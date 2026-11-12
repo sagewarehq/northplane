@@ -80,7 +80,7 @@ export async function createAgentManager(
   }
 
   if (!supportsTagOnlyKeys) {
-    log.error("agent", "The Headplane agent requires Headscale 0.28 or newer");
+    log.error("agent", "The Northplane agent requires Headscale 0.28 or newer");
     log.error("agent", "The agent will not run without support for tag-only keys");
     return;
   }
@@ -183,7 +183,7 @@ export async function createAgentManager(
       registering.add(child);
     }
 
-    // A dead agent's EPIPE would otherwise crash Headplane.
+    // A dead agent's EPIPE would otherwise crash Northplane.
     child.stdin?.on("error", (error) => {
       log.debug("agent", "Agent stdin closed: %s", error.message);
     });

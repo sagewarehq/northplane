@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { Avatar as ShadcnAvatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import cn from "~/utils/cn";
 
 export interface AvatarProps {
@@ -8,34 +7,15 @@ export interface AvatarProps {
   className?: string;
 }
 
+// Base UI's Avatar shows the initial until the image loads, and keeps it when
+// the image fails, before or after hydration.
 export default function Avatar({ name, src, className }: AvatarProps) {
-  const [isBroken, setIsBroken] = useState(false);
-  const classes = cn(
-    "inline-grid size-7 shrink-0 place-items-center overflow-hidden rounded-full",
-    "border border-line bg-subtle text-[11px] font-semibold text-muted",
-    className,
-  );
-
-  if (!src || isBroken) {
-    return (
-      <span aria-label={name} className={classes} role="img">
-        {name.charAt(0).toUpperCase()}
-      </span>
-    );
-  }
-
   return (
-    <img
-      alt={name}
-      className={classes}
-      onError={() => setIsBroken(true)}
-      // An image that fails before hydration never fires onError.
-      ref={(img) => {
-        if (img?.complete && img.naturalWidth === 0) {
-          setIsBroken(true);
-        }
-      }}
-      src={src}
-    />
+    <ShadcnAvatar aria-label={name} className={cn("size-7", className)} role="img">
+      {src && <AvatarImage alt={name} src={src} />}
+      <AvatarFallback className="text-[11px] font-semibold">
+        {name.charAt(0).toUpperCase()}
+      </AvatarFallback>
+    </ShadcnAvatar>
   );
 }

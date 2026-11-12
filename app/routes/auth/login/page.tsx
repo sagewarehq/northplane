@@ -127,7 +127,7 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
     <OidcConfigErrorNotice errors={oidcErrorCodes} />
   ) : showCookieWarning ? (
     <Callout className="mb-6" title="Sign-in won't work over HTTP" variant="error">
-      Headplane is set to use secure cookies, but this page was loaded over an insecure connection.{" "}
+      Northplane is set to use secure cookies, but this page was loaded over an insecure connection.{" "}
       <Link external styled to="https://headplane.net/troubleshooting#signing-in-does-nothing">
         Docs
       </Link>
@@ -135,7 +135,7 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
   ) : undefined;
 
   return (
-    <Shell title="Sign in to Headplane">
+    <Shell title="Sign in to Northplane">
       {notice}
       {isOidcConnectorEnabled && (
         <>
@@ -147,10 +147,10 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
           >
             Continue with SSO
           </Button>
-          <div className="text-muted my-6 flex items-center gap-3 text-xs">
-            <span className="bg-line h-px flex-1" />
+          <div className="text-muted-foreground my-6 flex items-center gap-3 text-xs">
+            <span className="bg-border h-px flex-1" />
             or
-            <span className="bg-line h-px flex-1" />
+            <span className="bg-border h-px flex-1" />
           </div>
         </>
       )}

@@ -59,7 +59,7 @@ export default function NewMachine(data: NewMachineProps) {
         />
       </ActionDialog>
       <Menu disabled={data.isDisabled}>
-        <MenuTrigger className="bg-ink text-ink-fg hover:bg-ink/90 h-8 gap-1.5 rounded-md px-3 text-sm font-medium">
+        <MenuTrigger className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 gap-1.5 rounded-md px-3 text-sm font-medium">
           <Plus className="size-3.5" />
           Add machine
         </MenuTrigger>

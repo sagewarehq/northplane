@@ -13,10 +13,10 @@ export default function Footer({ isDebug, baseUrl }: FooterProps) {
   const [urlVisible, setUrlVisible] = useState(false);
 
   return (
-    <footer className={cn("fixed w-full bottom-0 left-0 z-20", "bg-surface border-t border-line")}>
+    <footer className={cn("fixed w-full bottom-0 left-0 z-20", "bg-card border-t border-border")}>
       <div className="container flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <p className="min-w-0 text-xs">
-          Headplane is free and open-source. Please consider{" "}
+          Northplane is free and open-source. Please consider{" "}
           <Link external styled to="https://tale.me/sponsor">
             sponsoring
           </Link>{" "}
@@ -30,7 +30,7 @@ export default function Footer({ isDebug, baseUrl }: FooterProps) {
               Debug
             </span>
           )}
-          <p className="text-muted">
+          <p className="text-muted-foreground">
             {__VERSION__} &middot;{" "}
             {urlVisible ? (
               <code className="break-all">{baseUrl}</code>
@@ -42,7 +42,7 @@ export default function Footer({ isDebug, baseUrl }: FooterProps) {
               aria-label={urlVisible ? "Hide server URL" : "Show server URL"}
               className={cn(
                 "ml-1 inline-flex align-middle rounded-xs p-0.5",
-                "text-muted hover:text-muted",
+                "text-muted-foreground hover:text-muted-foreground",
                 "focus-ring",
               )}
               onClick={() => setUrlVisible((v) => !v)}

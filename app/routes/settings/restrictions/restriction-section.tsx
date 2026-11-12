@@ -38,7 +38,7 @@ export default function RestrictionSection({ type, values, isDisabled }: Props) 
       title={title}
     >
       {values.length === 0 ? (
-        <p className="text-muted py-2.5 text-sm">{empty}</p>
+        <p className="text-muted-foreground py-2.5 text-sm">{empty}</p>
       ) : (
         <RowList>
           {values.map((value) => (

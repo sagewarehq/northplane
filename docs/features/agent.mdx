@@ -1,5 +1,5 @@
 ---
-title: Headplane Agent
+title: Northplane Agent
 description: Show each machine's Tailscale version and OS, and enable Browser SSH.
 ---
 
@@ -8,15 +8,15 @@ import { versions } from "@/lib/versions";
 import agentLight from "../assets/agent-light.png";
 import agentDark from "../assets/agent-dark.png";
 
-# Headplane Agent
+# Northplane Agent
 
-The Headplane Agent is a small Tailscale node that Headplane runs on the
+The Northplane Agent is a small Tailscale node that Northplane runs on the
 tailnet. Headscale's API doesn't report which Tailscale version or OS a machine
 runs, so the agent reads them from its view of the network, every three minutes
 by default. [Browser SSH](/features/ssh) needs it too.
 
 <Figure
-  alt="The agent's status in Headplane's settings"
+  alt="The agent's status in Northplane's settings"
   light={agentLight}
   dark={agentDark}
   caption="Settings → Agent shows whether the agent is connected"
@@ -40,7 +40,7 @@ copy `build/hp_agent` to `/usr/libexec/headplane/agent`, or point
 
 After a restart, the agent shows up in the machine list as `headplane-agent`,
 tagged `tag:headplane-agent`. **Settings → Agent** shows whether it's
-connected. If Headscale requires new machines to be approved, Headplane
+connected. If Headscale requires new machines to be approved, Northplane
 approves the agent with the API key, and the same page shows the approval link
 if that fails.
 
@@ -89,7 +89,7 @@ removed by hand.
 
 ## Troubleshooting
 
-- **The agent doesn't start**: Headplane's log says why. The usual causes are
+- **The agent doesn't start**: Northplane's log says why. The usual causes are
   a missing `headscale.api_key`, Headscale older than
   {versions.headscale.agent}, or no binary at `executable_path`.
 - **Some machines have no version or OS**: the ACL policy keeps them from

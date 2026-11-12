@@ -20,7 +20,7 @@ export default function CreateUser({ isOidc, isDisabled }: CreateUserProps) {
     <ActionDialog
       description={`The user is listed under Unlinked Headscale Users until they sign in${
         isOidc ? " through your OIDC provider" : ""
-      }, which links them to a Headplane account.`}
+      }, which links them to a Northplane account.`}
       intent="create"
       submitLabel="Create user"
       title="Create a Headscale user"

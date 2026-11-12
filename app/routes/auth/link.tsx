@@ -68,7 +68,7 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
 
   return (
     <Shell
-      description="Headplane couldn't match your sign-in to a Headscale user. Pick the one that's yours."
+      description="Northplane couldn't match your sign-in to a Headscale user. Pick the one that's yours."
       title="Link your account"
     >
       <Form className="flex flex-col gap-3" method="POST">
@@ -93,7 +93,7 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
           Skip for now
         </Button>
       </Form>
-      <p className="text-muted mt-6 text-sm">
+      <p className="text-muted-foreground mt-6 text-sm">
         You'll add machines and create auth keys as this user. You can change it later from the
         Users page.
       </p>

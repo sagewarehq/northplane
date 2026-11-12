@@ -1,12 +1,11 @@
-import { Input as BaseInput } from "@base-ui/react/input";
 import type { ComponentProps } from "react";
 
-import Field, { controlClass, type FieldProps } from "~/components/field";
-import cn from "~/utils/cn";
+import Field, { type FieldProps } from "~/components/field";
+import { Input as ShadcnInput } from "~/components/ui/input";
 
 export interface InputProps
   extends
-    Omit<ComponentProps<typeof BaseInput>, "onChange" | "children" | "className">,
+    Omit<ComponentProps<typeof ShadcnInput>, "onChange" | "children" | "className">,
     Omit<FieldProps, "children"> {
   onChange?: (value: string) => void;
 }
@@ -38,9 +37,9 @@ export default function Input({
       name={name}
       validate={validate}
     >
-      <BaseInput
+      <ShadcnInput
         {...props}
-        className={cn(controlClass, "px-2.5")}
+        className="group-data-invalid:border-destructive group-data-invalid:ring-destructive/20"
         onChange={onChange ? (event) => onChange(event.currentTarget.value) : undefined}
       />
     </Field>

@@ -1,7 +1,19 @@
-import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
-import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import React from "react";
 
+import {
+  AlertDialog as ShadcnAlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
+import {
+  Dialog as ShadcnDialog,
+  DialogClose as ShadcnDialogClose,
+  DialogContent,
+  DialogDescription as ShadcnDialogDescription,
+  DialogFooter,
+  DialogTitle as ShadcnDialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
 import cn from "~/utils/cn";
 
 export interface DialogProps {
@@ -13,18 +25,8 @@ export interface DialogProps {
   children: React.ReactNode;
 }
 
-const backdropClass = cn(
-  "fixed inset-0 z-40 bg-backdrop",
-  "transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0",
-);
-
-const popupClass = cn(
-  "flex max-h-[90dvh] w-full max-w-lg flex-col gap-4 overflow-y-auto rounded-lg p-5",
-  "bg-raised border-overlay shadow-overlay outline-hidden",
-  "transition-[opacity,scale] duration-150",
-  "data-ending-style:scale-[0.98] data-ending-style:opacity-0",
-  "data-starting-style:scale-[0.98] data-starting-style:opacity-0",
-);
+// Long forms scroll inside the dialog rather than past the window.
+const contentClass = "max-h-[90dvh] overflow-y-auto sm:max-w-lg";
 
 export function Dialog({
   open,
@@ -35,19 +37,16 @@ export function Dialog({
   children,
 }: DialogProps) {
   return (
-    <BaseDialog.Root
+    <ShadcnDialog
       onOpenChange={(next) => onOpenChange?.(next)}
       onOpenChangeComplete={onOpenChangeComplete}
       open={open}
     >
-      {trigger && <BaseDialog.Trigger render={trigger} />}
-      <BaseDialog.Portal>
-        <BaseDialog.Backdrop className={backdropClass} />
-        <BaseDialog.Viewport className="fixed inset-0 z-40 grid place-items-center p-4">
-          <BaseDialog.Popup className={cn(popupClass, className)}>{children}</BaseDialog.Popup>
-        </BaseDialog.Viewport>
-      </BaseDialog.Portal>
-    </BaseDialog.Root>
+      {trigger && <DialogTrigger render={trigger} />}
+      <DialogContent className={cn(contentClass, className)} showCloseButton={false}>
+        {children}
+      </DialogContent>
+    </ShadcnDialog>
   );
 }
 
@@ -60,42 +59,28 @@ export function AlertDialog({
   children,
 }: DialogProps) {
   return (
-    <BaseAlertDialog.Root
+    <ShadcnAlertDialog
       onOpenChange={(next) => onOpenChange?.(next)}
       onOpenChangeComplete={onOpenChangeComplete}
       open={open}
     >
-      {trigger && <BaseAlertDialog.Trigger render={trigger} />}
-      <BaseAlertDialog.Portal>
-        <BaseAlertDialog.Backdrop className={backdropClass} />
-        <BaseAlertDialog.Viewport className="fixed inset-0 z-40 grid place-items-center p-4">
-          <BaseAlertDialog.Popup className={cn(popupClass, className)}>
-            {children}
-          </BaseAlertDialog.Popup>
-        </BaseAlertDialog.Viewport>
-      </BaseAlertDialog.Portal>
-    </BaseAlertDialog.Root>
+      {trigger && <AlertDialogTrigger render={trigger} />}
+      <AlertDialogContent className={cn(contentClass, className)}>{children}</AlertDialogContent>
+    </ShadcnAlertDialog>
   );
 }
 
-export function DialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Title>) {
-  return (
-    <BaseDialog.Title {...props} className={cn("text-lg font-semibold text-balance", className)} />
-  );
+// Base UI's Title, Description and Close work in both dialog kinds.
+export function DialogTitle(props: React.ComponentProps<typeof ShadcnDialogTitle>) {
+  return <ShadcnDialogTitle {...props} />;
 }
 
-export function DialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Description>) {
-  return <BaseDialog.Description {...props} className={cn("-mt-2 text-muted", className)} />;
+export function DialogDescription(props: React.ComponentProps<typeof ShadcnDialogDescription>) {
+  return <ShadcnDialogDescription {...props} />;
 }
 
-export function DialogActions({ className, ...props }: React.ComponentProps<"div">) {
-  return <div {...props} className={cn("mt-1 flex justify-end gap-2", className)} />;
+export function DialogActions(props: React.ComponentProps<typeof DialogFooter>) {
+  return <DialogFooter {...props} />;
 }
 
-export const DialogClose = BaseDialog.Close;
+export const DialogClose = ShadcnDialogClose;

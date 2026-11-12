@@ -31,6 +31,8 @@ export interface HeaderProps {
     settings: boolean;
   };
   configAvailable: boolean;
+  // The Headscale server being managed, like `vpn.example.com`.
+  network?: string;
 }
 
 const tabs = [
@@ -51,7 +53,7 @@ const colorSchemes = [
   icon: typeof Monitor;
 }>;
 
-export default function Header({ user, access, configAvailable }: HeaderProps) {
+export default function Header({ user, access, configAvailable, network }: HeaderProps) {
   const submit = useSubmit();
   const navigate = useNavigate();
   const showTabs = access.ui;
@@ -67,11 +69,21 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
   );
 
   return (
-    <header className={cn("sticky top-0 z-20 bg-surface text-fg", "border-b border-line")}>
+    <header className={cn("sticky top-0 z-20 bg-card text-foreground", "border-b border-border")}>
       <div className="container flex h-13 items-center gap-x-5">
-        <div className="flex items-center gap-x-2">
+        <div className="flex min-w-0 items-center gap-x-2">
           <LogoMark className="size-[18px] shrink-0" />
-          <span className="text-sm font-semibold tracking-tight">headplane</span>
+          <span className="text-sm font-semibold tracking-tight">Northplane</span>
+          {network && (
+            <>
+              <span aria-hidden="true" className="text-input">
+                /
+              </span>
+              <span className="text-muted-foreground truncate font-mono text-xs" title={network}>
+                {network}
+              </span>
+            </>
+          )}
         </div>
         {showTabs && (
           <nav className="hidden h-full min-w-0 gap-x-0.5 overflow-x-auto text-[13px] font-medium md:flex">
@@ -81,8 +93,10 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
                 className={({ isActive }) =>
                   cn(
                     "flex h-full items-center px-2.5 text-nowrap",
-                    "focus-ring hover:text-fg",
-                    isActive ? "text-fg shadow-[inset_0_-2px_0_var(--color-accent)]" : "text-muted",
+                    "focus-ring hover:text-foreground",
+                    isActive
+                      ? "text-foreground shadow-[inset_0_-2px_0_var(--color-brand)]"
+                      : "text-muted-foreground",
                   )
                 }
                 prefetch="intent"
@@ -96,7 +110,7 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
         <div className="ml-auto flex shrink-0 items-center gap-x-2">
           {showTabs && (
             <Menu>
-              <MenuTrigger className="text-muted hover:bg-hover hover:text-fg size-8 rounded-md md:hidden">
+              <MenuTrigger className="text-muted-foreground hover:bg-accent hover:text-foreground size-8 rounded-md md:hidden">
                 <MenuIcon aria-label="Navigation" className="size-4" />
               </MenuTrigger>
               <MenuContent align="end">
@@ -104,7 +118,7 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
                   <MenuItem key={tab.to} onClick={() => navigate(tab.to)}>
                     <span
                       className={cn(
-                        location.pathname.startsWith(tab.to) && "text-accent font-medium",
+                        location.pathname.startsWith(tab.to) && "text-brand font-medium",
                       )}
                     >
                       {tab.label}
@@ -115,7 +129,7 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
             </Menu>
           )}
           <Menu>
-            <MenuTrigger className="text-muted hover:bg-hover hover:text-fg size-8 rounded-md">
+            <MenuTrigger className="text-muted-foreground hover:bg-accent hover:text-foreground size-8 rounded-md">
               <CircleQuestionMark aria-label="Help" className="size-4" />
             </MenuTrigger>
             <MenuContent align="end">
@@ -142,7 +156,7 @@ export default function Header({ user, access, configAvailable }: HeaderProps) {
             </MenuTrigger>
             <MenuContent align="end">
               <MenuItem disabled>
-                <div className="text-fg">
+                <div className="text-foreground">
                   {user.subject === "api_key" ? (
                     <>
                       <p className="font-semibold">API Key</p>

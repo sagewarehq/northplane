@@ -27,10 +27,10 @@ export default function VersionBanner() {
       ) : (
         <>
           <span className="sm:hidden">
-            Headplane <strong>{docsBuild.version}</strong> docs.
+            Northplane <strong>{docsBuild.version}</strong> docs.
           </span>
           <span className="max-sm:hidden">
-            These docs are for Headplane <strong>{docsBuild.version}</strong>.
+            These docs are for Northplane <strong>{docsBuild.version}</strong>.
           </span>
         </>
       )}

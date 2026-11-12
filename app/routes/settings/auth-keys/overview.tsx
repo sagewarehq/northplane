@@ -226,13 +226,13 @@ export default function Page({
       )}
       {missing.length > 0 && (
         <Callout className="mb-6" title="Some keys couldn't be loaded" variant="error">
-          Headplane couldn't fetch the keys for{" "}
+          Northplane couldn't fetch the keys for{" "}
           {missing.map(({ user }) => getUserDisplayName(user)).join(", ")}. Check the server logs
           for details.
         </Callout>
       )}
       {allKeys.length === 0 ? (
-        <p className="text-muted text-sm">No auth keys yet.</p>
+        <p className="text-muted-foreground text-sm">No auth keys yet.</p>
       ) : (
         <>
           <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -250,12 +250,12 @@ export default function Page({
               options={STATUS_OPTIONS}
               value={status}
             />
-            <span className="text-muted ml-auto text-xs tabular-nums">
+            <span className="text-muted-foreground ml-auto text-xs tabular-nums">
               {filteredKeys.length} {filteredKeys.length === 1 ? "key" : "keys"}
             </span>
           </div>
           {filteredKeys.length === 0 ? (
-            <p className="text-muted border-line border-t py-2.5 text-sm">
+            <p className="text-muted-foreground border-border border-t py-2.5 text-sm">
               No keys match these filters.
             </p>
           ) : (

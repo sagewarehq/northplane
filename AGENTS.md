@@ -1,6 +1,6 @@
-# Headplane
+# Northplane
 
-Headplane is a web UI for Headscale, the self-hosted Tailscale control server.
+Northplane is a web UI for Headscale, the self-hosted Tailscale control server.
 Three rules guide every change:
 
 - **Simple starts.** Setup should take as little as possible, with advanced
@@ -104,13 +104,13 @@ stub the client.
 ### Integration tests (`tests/integration/`)
 
 Use these for anything that needs real Headscale, a real tailnet, real
-containers, or a real identity provider. They're how we know Headplane works
+containers, or a real identity provider. They're how we know Northplane works
 against the versions we claim to support. Prefer a few broad, scenario-shaped
-tests that drive Headplane and check what real nodes see, over many narrow ones.
+tests that drive Northplane and check what real nodes see, over many narrow ones.
 
-- `headscale/contract.test.ts` is what Headplane relies on from Headscale's
-  API, asserted through Headplane's client on every supported version. When
-  Headplane starts depending on a new behavior or a version quirk (like 0.28.0
+- `headscale/contract.test.ts` is what Northplane relies on from Headscale's
+  API, asserted through Northplane's client on every supported version. When
+  Northplane starts depending on a new behavior or a version quirk (like 0.28.0
   deleting every auth key along with any user), add it there.
 - `headplane/` drives routes against a real tailnet. Get the app from
   `tailnet.headplane()`: `app.signIn(role)` returns a real session cookie and
@@ -139,7 +139,7 @@ All container setup goes through the harness, built on `testcontainers`.
   Tailscale node that joins with a pre-auth key. `node.down()`, `node.up()`,
   `node.status()`, and `node.tailscale([...])` control it.
   `tailnet.pendingNode()` waits for interactive registration.
-- `tailnet.headplane()` runs Headplane in-process against the tailnet, with a
+- `tailnet.headplane()` runs Northplane in-process against the tailnet, with a
   fresh database each call. It's built on `createTestApp()`
   (`tests/support/app.ts`).
 - Supported Headscale versions and the pinned Tailscale and Dex images live only

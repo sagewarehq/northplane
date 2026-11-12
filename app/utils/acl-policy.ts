@@ -13,7 +13,7 @@ import {
 import { scanHuJson } from "~/utils/node-info";
 
 // A structured view over the Headscale ACL policy (HuJSON), which Headscale
-// stores as an opaque string. What Headplane does not model is kept in `extra`.
+// stores as an opaque string. What Northplane does not model is kept in `extra`.
 
 // `action` is kept verbatim: rewriting an unknown action into `accept` would
 // turn a rule we do not understand into one that allows traffic.
@@ -62,7 +62,7 @@ export interface Policy {
   ssh: SshRule[];
   grants: Grant[];
   autoApprovers: AutoApprovers;
-  // Top-level keys Headplane does not model (nodeAttrs, tests, ...)
+  // Top-level keys Northplane does not model (nodeAttrs, tests, ...)
   extra: Record<string, unknown>;
   // The order the top-level keys appeared in, so serializing keeps it.
   keyOrder: string[];

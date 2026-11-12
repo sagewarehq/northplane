@@ -1,6 +1,6 @@
 ---
 title: Integrations
-description: Let Headplane edit Headscale's DNS settings and sign-in restrictions, and restart Headscale to apply them.
+description: Let Northplane edit Headscale's DNS settings and sign-in restrictions, and restart Headscale to apply them.
 ---
 
 import { dockerCompose } from "./compose-examples";
@@ -11,28 +11,28 @@ import restrictionsDark from "../assets/restrictions-dark.png";
 # Integrations
 
 Headscale keeps its DNS settings and OIDC sign-in restrictions in its own
-config file, not behind its API. For Headplane to show or change them, it
+config file, not behind its API. For Northplane to show or change them, it
 needs access to that file. To apply a change, Headscale has to restart, and an
-integration is what lets Headplane do that itself.
+integration is what lets Northplane do that itself.
 
 ## What each setup can do
 
 Machines, users, auth keys and ACLs go through Headscale's API and work in
-every setup. The rest depends on how much access Headplane has:
+every setup. The rest depends on how much access Northplane has:
 
 | Setup                                | DNS settings and sign-in restrictions                       |
 | ------------------------------------ | ----------------------------------------------------------- |
 | No access to Headscale's config      | Not shown                                                   |
 | Config file mounted read-only        | DNS settings shown read-only, sign-in restrictions hidden   |
 | Writable config file, no integration | Saved to the file, applied the next time Headscale restarts |
-| Writable config file and integration | Applied right away, Headplane restarts Headscale            |
+| Writable config file and integration | Applied right away, Northplane restarts Headscale           |
 
 Sign-in restrictions edit the `allowed_domains`, `allowed_groups` and
 `allowed_users` options in Headscale's `oidc` section, so they only appear when
 Headscale signs people in through OIDC.
 
 <Figure
-  alt="Sign-in restrictions in Headplane"
+  alt="Sign-in restrictions in Northplane"
   light={restrictionsLight}
   dark={restrictionsDark}
   caption="Limiting Headscale sign-ins to an email domain"
@@ -44,8 +44,8 @@ fine setup when Headscale runs on another machine. The [agent](/features/agent),
 
 ## Sharing Headscale's config file
 
-Set `headscale.config_path` to where Headplane can find Headscale's
-`config.yaml`. In a container, that's the path inside Headplane's container.
+Set `headscale.config_path` to where Northplane can find Headscale's
+`config.yaml`. In a container, that's the path inside Northplane's container.
 Changes need write access to the file, and saving keeps its comments.
 
 ```yaml
@@ -63,7 +63,7 @@ Headscale reloads only its ACL policy on `SIGHUP`. Every other setting in
 
 ## DNS records
 
-DNS records are the exception: Headplane only edits them through the JSON file
+DNS records are the exception: Northplane only edits them through the JSON file
 Headscale reads from `dns.extra_records_path`. Headscale watches that file, so
 record changes apply right away, without an integration or a restart.
 
@@ -80,12 +80,12 @@ The file holds a JSON array of records:
 ```
 
 The path comes from Headscale's config, and the file has to be writable for
-Headplane. When it sits at a different path in Headplane's container, set
+Northplane. When it sits at a different path in Northplane's container, set
 `headscale.dns_records_path` to that path. Setting `dns_records_path` without
-an `extra_records_path` in Headscale's config stops Headplane from starting.
+an `extra_records_path` in Headscale's config stops Northplane from starting.
 
 Records listed inline under Headscale's `dns.extra_records` are shown
-read-only. Move them into the JSON file to manage them from Headplane.
+read-only. Move them into the JSON file to manage them from Northplane.
 
 ## Docker
 
@@ -102,7 +102,7 @@ It needs:
 
 <DynamicCodeBlock lang="yaml" code={dockerCompose} />
 
-Then enable the integration in Headplane's config:
+Then enable the integration in Northplane's config:
 
 ```yaml
 integration:
@@ -122,9 +122,9 @@ Podman's Docker-compatible socket.
 
 ## Kubernetes
 
-Use this when Headplane runs as a sidecar in the same pod as Headscale. The two
-containers share a process namespace, so Headplane can stop Headscale with
-`SIGTERM`. The kubelet then restarts the container, and Headplane waits for
+Use this when Northplane runs as a sidecar in the same pod as Headscale. The two
+containers share a process namespace, so Northplane can stop Headscale with
+`SIGTERM`. The kubelet then restarts the container, and Northplane waits for
 Headscale to come back.
 
 The pod needs:
@@ -133,9 +133,9 @@ The pod needs:
 - Headscale's config file on a writable volume shared by both containers.
   ConfigMap mounts are read-only, so copy the file onto a writable volume
   first, for example with an init container
-- Headplane running as the same user as Headscale, or with the `KILL`
+- Northplane running as the same user as Headscale, or with the `KILL`
   capability, so it can signal Headscale
-- The pod's name, passed to Headplane through the Downward API
+- The pod's name, passed to Northplane through the Downward API
 
 ```yaml
 spec:
@@ -156,24 +156,24 @@ integration:
     enabled: true
 ```
 
-At startup, Headplane checks through the Kubernetes API that the pod shares
+At startup, Northplane checks through the Kubernetes API that the pod shares
 its process namespace. Its service account needs permission to `get` pods in
 its namespace. To skip the check and the permission, set
 `integration.kubernetes.validate_manifest: false`.
 
 ## proc
 
-Use this when Headplane and Headscale run directly on the same Linux host. For
-each change, Headplane finds the `headscale serve` process in `/proc`, stops it
+Use this when Northplane and Headscale run directly on the same Linux host. For
+each change, Northplane finds the `headscale serve` process in `/proc`, stops it
 with `SIGTERM` and waits for a new one to come up healthy.
 
 That only works if something restarts Headscale. Headscale's own systemd unit
 sets `Restart=always`, and so does the NixOS module. Without a supervisor,
-Headscale stays down after the first change, and Headplane reports that it
+Headscale stays down after the first change, and Northplane reports that it
 didn't come back.
 
 Signaling Headscale also takes permission: run both as the same user, or
-Headplane as root.
+Northplane as root.
 
 ```yaml
 integration:

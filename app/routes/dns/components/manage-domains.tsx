@@ -27,11 +27,11 @@ export default function ManageDomains({ searchDomains, isDisabled, magic }: Prop
         </Callout>
       )}
       {!magic && domains.length === 0 ? (
-        <p className="text-muted py-2.5 text-sm">No search domains</p>
+        <p className="text-muted-foreground py-2.5 text-sm">No search domains</p>
       ) : (
         <RowList>
           {magic && (
-            <Row action={<span className="text-muted px-2">Magic DNS</span>}>
+            <Row action={<span className="text-muted-foreground px-2">Magic DNS</span>}>
               <span className="font-mono text-xs break-all">{magic}</span>
             </Row>
           )}

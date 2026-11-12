@@ -287,8 +287,8 @@ export default function Page({ loaderData }: Route.ComponentProps) {
               className={cn(
                 "absolute right-2 top-1/2 -translate-y-1/2",
                 "p-1 rounded-full",
-                "text-muted hover:text-muted",
-                "hover:bg-hover",
+                "text-muted-foreground hover:text-muted-foreground",
+                "hover:bg-accent",
               )}
               onClick={clearSearch}
               type="button"
@@ -298,7 +298,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
           )}
         </div>
         <MachineFilters users={loaderData.users} populatedNodes={loaderData.populatedNodes} />
-        <span className="text-muted ml-auto text-xs whitespace-nowrap tabular-nums">
+        <span className="text-muted-foreground ml-auto text-xs whitespace-nowrap tabular-nums">
           {searchQuery || hasActiveFilters
             ? `Showing ${filteredAndSortedNodes.length} of ${loaderData.populatedNodes.length} machines`
             : `${loaderData.populatedNodes.length} machines`}
@@ -350,7 +350,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
           {filteredAndSortedNodes.length === 0 ? (
             <tr>
               <TableCell
-                className="text-muted py-8 text-center"
+                className="text-muted-foreground py-8 text-center"
                 colSpan={loaderData.agent !== undefined ? 5 : 4}
               >
                 No machines match the current filters

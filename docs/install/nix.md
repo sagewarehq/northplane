@@ -1,13 +1,13 @@
 ---
 title: Nix/NixOS
-description: Run Headplane on NixOS with the flake and its NixOS module.
+description: Run Northplane on NixOS with the flake and its NixOS module.
 ---
 
 # Nix/NixOS
 
 The repository's [flake](https://github.com/tale/headplane/blob/main/flake.nix)
 provides an overlay with `pkgs.headplane` and `pkgs.headplane-agent`, and a
-NixOS module that runs Headplane as a systemd service under
+NixOS module that runs Northplane as a systemd service under
 `services.headplane`. Run `nix flake show github:tale/headplane` to list
 everything it exports.
 
@@ -70,10 +70,10 @@ It enables the [proc integration](/configuration/integrations#proc) by default,
 which restarts Headscale through systemd when settings change in the UI.
 
 Generating `headscale.config_path` from `services.headscale.settings`, as
-above, puts the file in the Nix store, which is read-only. Headplane shows
+above, puts the file in the Nix store, which is read-only. Northplane shows
 Headscale's DNS settings without changing them and hides sign-in restrictions,
 so keep managing both in the Nix configuration. DNS records are the exception:
 point Headscale's `dns.extra_records_path` at a writable file outside the store
-and Headplane can edit them.
+and Northplane can edit them.
 
 Set `services.headplane.debug = true` for debug logs.

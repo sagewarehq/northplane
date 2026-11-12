@@ -1,28 +1,28 @@
 ---
 title: Reverse proxy
-description: Serve Headplane and Headscale from one domain behind a reverse proxy.
+description: Serve Northplane and Headscale from one domain behind a reverse proxy.
 ---
 
 import { traefikCompose } from "./compose-examples";
 
 # Reverse proxy
 
-The recommended setup serves both from one domain: Headplane under `/admin`,
+The recommended setup serves both from one domain: Northplane under `/admin`,
 Headscale on everything else. Both then share one certificate, and because the
 browser sees a single origin, no CORS headers are needed.
 
 Whatever the proxy:
 
-- Route `/admin` to Headplane (port 3000) and everything else to Headscale
+- Route `/admin` to Northplane (port 3000) and everything else to Headscale
   (port 8080).
 - Forward WebSocket upgrades to Headscale. Tailscale clients and
   [Browser SSH](/features/ssh) both rely on them.
-- Set `server.base_url` in Headplane's config to the public URL, such as
+- Set `server.base_url` in Northplane's config to the public URL, such as
   `https://headscale.example.com`. [SSO](/features/sso) needs it to build its
   callback URL.
 
 Leave `server.cookie_secure` at its default of `true` when the proxy serves
-HTTPS. Set it to `false` only when Headplane is reached over plain HTTP, or
+HTTPS. Set it to `false` only when Northplane is reached over plain HTTP, or
 sign-in won't stick.
 
 ## Caddy
@@ -31,7 +31,7 @@ Caddy forwards WebSocket upgrades without extra configuration:
 
 ```caddyfile
 headscale.example.com {
-    # Optional: send visitors at / to Headplane
+    # Optional: send visitors at / to Northplane
     redir / /admin/
 
     handle /admin* {
@@ -97,13 +97,13 @@ without extra configuration.
 
 ## Separate domains
 
-Headplane and Headscale can also live on different domains, such as
+Northplane and Headscale can also live on different domains, such as
 `headplane.example.com` and `headscale.example.com`. Everything works the same
 except [Browser SSH](/features/ssh), which connects from the browser straight
 to Headscale. Its WebSocket connections aren't subject to CORS, but it first
 fetches Headscale's public key with a plain cross-origin request, so
 Headscale's responses need an `Access-Control-Allow-Origin` header with
-Headplane's origin. In Caddy:
+Northplane's origin. In Caddy:
 
 ```caddyfile
 headscale.example.com {
@@ -118,8 +118,8 @@ to Headscale's `location`.
 
 ## A different path
 
-To serve Headplane somewhere other than `/admin`, such as `/tools/headplane`,
-set `server.base_path` and restart Headplane:
+To serve Northplane somewhere other than `/admin`, such as `/tools/headplane`,
+set `server.base_path` and restart Northplane:
 
 ```yaml
 server:
@@ -127,12 +127,12 @@ server:
 ```
 
 The path starts with a slash, doesn't end with one, and can't be `/`. Route it
-to Headplane in the examples above in place of `/admin`, without stripping it.
+to Northplane in the examples above in place of `/admin`, without stripping it.
 Keep the path out of `server.base_url`. With [SSO](/features/sso), register the
 callback under the new path. Changing the path signs everyone out, since
 sessions are tied to it.
 
 ## Serving HTTPS without a proxy
 
-Headplane can terminate TLS itself, which suits a single machine without a
+Northplane can terminate TLS itself, which suits a single machine without a
 proxy. See [TLS & certificates](/configuration/tls#tls-termination).

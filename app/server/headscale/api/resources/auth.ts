@@ -4,7 +4,7 @@ import type { Transport } from "../transport";
 export interface AuthApi {
   /**
    * Approve a pending Headscale authentication request.
-   * Used by the Headplane agent to auto-approve its own registration.
+   * Used by the Northplane agent to auto-approve its own registration.
    */
   approve(authId: string): Promise<void>;
 }

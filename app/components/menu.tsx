@@ -1,9 +1,15 @@
-import { Menu as BaseMenu } from "@base-ui/react/menu";
 import type { ComponentProps, JSX, ReactNode } from "react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import cn from "~/utils/cn";
 
-const SIDE_OFFSET = 8;
+// Northplane's menu API on shadcn's DropdownMenu.
 
 export const Menu = ({
   children,
@@ -11,7 +17,7 @@ export const Menu = ({
 }: {
   children: ReactNode;
   disabled?: boolean;
-}): JSX.Element => <BaseMenu.Root disabled={disabled}>{children}</BaseMenu.Root>;
+}): JSX.Element => <DropdownMenu disabled={disabled}>{children}</DropdownMenu>;
 
 export const MenuTrigger = ({
   className,
@@ -19,49 +25,44 @@ export const MenuTrigger = ({
   disabled,
   onClick,
 }: Pick<
-  ComponentProps<typeof BaseMenu.Trigger>,
+  ComponentProps<typeof DropdownMenuTrigger>,
   "className" | "children" | "disabled" | "onClick"
 >): JSX.Element => (
-  <BaseMenu.Trigger
+  <DropdownMenuTrigger
     className={cn(
-      "inline-flex items-center justify-center",
-      "focus-ring",
-      "disabled:opacity-50 disabled:cursor-not-allowed",
+      "inline-flex items-center justify-center outline-none",
+      "focus-visible:ring-3 focus-visible:ring-ring/50",
+      "disabled:cursor-not-allowed disabled:opacity-50",
       className,
     )}
     disabled={disabled}
     onClick={onClick}
   >
     {children}
-  </BaseMenu.Trigger>
+  </DropdownMenuTrigger>
 );
 
 export const MenuContent = ({
   children,
   className,
   side = "bottom",
-  sideOffset = SIDE_OFFSET,
+  sideOffset = 4,
   align = "start",
 }: {
   children: ReactNode;
   className?: string;
-  side?: ComponentProps<typeof BaseMenu.Positioner>["side"];
+  side?: ComponentProps<typeof DropdownMenuContent>["side"];
   sideOffset?: number;
-  align?: ComponentProps<typeof BaseMenu.Positioner>["align"];
+  align?: ComponentProps<typeof DropdownMenuContent>["align"];
 }): JSX.Element => (
-  <BaseMenu.Portal>
-    <BaseMenu.Positioner align={align} className="z-50" side={side} sideOffset={sideOffset}>
-      <BaseMenu.Popup
-        className={cn(
-          "max-h-(--available-height) min-w-50 overflow-y-auto rounded-lg py-1 outline-hidden",
-          "bg-raised border-overlay shadow-overlay",
-          className,
-        )}
-      >
-        {children}
-      </BaseMenu.Popup>
-    </BaseMenu.Positioner>
-  </BaseMenu.Portal>
+  <DropdownMenuContent
+    align={align}
+    className={cn("w-auto min-w-48", className)}
+    side={side}
+    sideOffset={sideOffset}
+  >
+    {children}
+  </DropdownMenuContent>
 );
 
 export const MenuItem = ({
@@ -70,26 +71,22 @@ export const MenuItem = ({
   children,
   disabled,
   onClick,
-}: Pick<ComponentProps<typeof BaseMenu.Item>, "className" | "children" | "disabled" | "onClick"> & {
+}: Pick<
+  ComponentProps<typeof DropdownMenuItem>,
+  "className" | "children" | "disabled" | "onClick"
+> & {
   variant?: "danger";
 }): JSX.Element => (
-  <BaseMenu.Item
-    className={cn(
-      "py-2 px-3 mx-1 rounded-md",
-      "select-none cursor-pointer",
-      "text-fg",
-      "data-highlighted:bg-hover",
-      "data-disabled:text-muted data-disabled:cursor-default",
-      variant === "danger" && "text-bad",
-      className,
-    )}
+  <DropdownMenuItem
+    className={className}
     disabled={disabled}
     onClick={onClick}
+    variant={variant === "danger" ? "destructive" : "default"}
   >
     {children}
-  </BaseMenu.Item>
+  </DropdownMenuItem>
 );
 
 export const MenuSeparator = ({ className }: { className?: string }): JSX.Element => (
-  <BaseMenu.Separator className={cn("mx-2 my-1 border-t border-line", className)} />
+  <DropdownMenuSeparator className={className} />
 );

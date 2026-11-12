@@ -6,7 +6,7 @@ interface MachinesSeenProps {
 
 export default function MachinesSeen({ machines }: MachinesSeenProps) {
   if (machines.length === 0) {
-    return <span className="text-muted">No machines</span>;
+    return <span className="text-muted-foreground">No machines</span>;
   }
 
   if (machines.some((machine) => machine.online)) {
@@ -15,7 +15,11 @@ export default function MachinesSeen({ machines }: MachinesSeenProps) {
 
   const lastSeen = new Date(Math.max(...machines.map((m) => new Date(m.lastSeen).getTime())));
   return (
-    <span className="text-muted" suppressHydrationWarning title={lastSeen.toLocaleString()}>
+    <span
+      className="text-muted-foreground"
+      suppressHydrationWarning
+      title={lastSeen.toLocaleString()}
+    >
       {formatTimeDelta(lastSeen)}
     </span>
   );

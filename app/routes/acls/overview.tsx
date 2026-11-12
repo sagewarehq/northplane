@@ -252,7 +252,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <>
             Headscale is set to read its policy from a file, and that file doesn't exist. Create it
             at the path in Headscale's config, or set <Code>policy.mode</Code> to{" "}
-            <Code>database</Code> so Headplane can manage the policy here.
+            <Code>database</Code> so Northplane can manage the policy here.
           </>
         }
         icon={<FileX />}

@@ -23,7 +23,7 @@ export function Editor(props: EditorProps) {
   const status = !parsed.ok
     ? { Icon: CircleX, label: parsed.error, className: "text-bad" }
     : isEmpty
-      ? { Icon: CircleDashed, label: "No policy yet", className: "text-muted" }
+      ? { Icon: CircleDashed, label: "No policy yet", className: "text-muted-foreground" }
       : { Icon: CircleCheck, label: "Valid HuJSON", className: "text-ok" };
 
   return (
@@ -36,7 +36,7 @@ export function Editor(props: EditorProps) {
           </div>
         }
       >
-        <div className="border-line bg-surface flex items-center justify-between gap-4 border-b px-3 py-2">
+        <div className="border-border bg-card flex items-center justify-between gap-4 border-b px-3 py-2">
           <div role="status" className={cn("flex min-w-0 items-center gap-2", status.className)}>
             <status.Icon className="size-4 shrink-0" />
             <span className="truncate">{status.label}</span>

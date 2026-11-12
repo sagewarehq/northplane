@@ -2,14 +2,14 @@
 //
 // The public entry point for talking to a Headscale server. At boot
 // we try `GET /version` (unauthenticated, present since Headscale
-// 0.27.0 — the minimum version Headplane supports) to derive a
+// 0.27.0 — the minimum version Northplane supports) to derive a
 // typed `Capabilities` object. Boot outcomes:
 //
 //   - success: parse the response, derive capabilities, done.
 //   - 404: Headscale is reachable but predates 0.27.0 and is no
 //     longer supported. Log an error and keep retrying so an
-//     upgrade is picked up without a Headplane restart.
-//   - any other failure (network, 5xx, parse): Headplane still
+//     upgrade is picked up without a Northplane restart.
+//   - any other failure (network, 5xx, parse): Northplane still
 //     boots with `version = unknown` (capabilities-permissive) and
 //     a background retry. This handles docker-compose start-order
 //     races without making the whole process unhappy.
@@ -102,7 +102,7 @@ export async function createHeadscale(opts: CreateHeadscaleOptions): Promise<Hea
       if (isDataWithApiError(error) && error.data.statusCode === 404) {
         log.error(
           "api",
-          "Headscale /version returned 404; Headplane requires Headscale %s or newer",
+          "Headscale /version returned 404; Northplane requires Headscale %s or newer",
           MIN_SUPPORTED_VERSION,
         );
         return false;
@@ -120,7 +120,7 @@ export async function createHeadscale(opts: CreateHeadscaleOptions): Promise<Hea
       if (await detectOnce()) return;
       scheduleRetry();
     }, retryIntervalMs);
-    // Don't keep the event loop alive on this timer alone — Headplane
+    // Don't keep the event loop alive on this timer alone — Northplane
     // should still shut down cleanly while we're waiting to retry.
     retryTimer.unref?.();
   }

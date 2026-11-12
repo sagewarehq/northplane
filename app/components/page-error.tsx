@@ -67,9 +67,11 @@ interface ErrorStateProps {
 export function ErrorState({ icon, title, description, children }: ErrorStateProps) {
   return (
     <div className="flex flex-col items-center py-24 text-center">
-      <span className="text-muted [&>svg]:size-8">{icon}</span>
+      <span className="text-muted-foreground [&>svg]:size-8">{icon}</span>
       <h2 className="mt-4 text-lg font-semibold text-balance">{title}</h2>
-      {description && <p className="text-muted mt-1 max-w-md text-balance">{description}</p>}
+      {description && (
+        <p className="text-muted-foreground mt-1 max-w-md text-balance">{description}</p>
+      )}
       {children}
     </div>
   );
@@ -78,8 +80,10 @@ export function ErrorState({ icon, title, description, children }: ErrorStatePro
 export function ErrorDetails({ details, className }: { details: string; className?: string }) {
   return (
     <details className={cn("mt-6 w-full max-w-lg text-left", className)}>
-      <summary className="text-muted hover:text-fg w-fit cursor-pointer text-sm">Details</summary>
-      <pre className="bg-subtle mt-2 overflow-x-auto rounded-md p-3 font-mono text-xs break-all whitespace-pre-wrap">
+      <summary className="text-muted-foreground hover:text-foreground w-fit cursor-pointer text-sm">
+        Details
+      </summary>
+      <pre className="bg-muted mt-2 overflow-x-auto rounded-md p-3 font-mono text-xs break-all whitespace-pre-wrap">
         {details}
       </pre>
     </details>

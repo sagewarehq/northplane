@@ -1,6 +1,11 @@
-import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import type { ComponentProps, ReactNode } from "react";
 
+import {
+  Tabs as ShadcnTabs,
+  TabsContent,
+  TabsList as ShadcnTabsList,
+  TabsTrigger,
+} from "~/components/ui/tabs";
 import cn from "~/utils/cn";
 
 export interface TabsProps {
@@ -14,74 +19,31 @@ export interface TabsProps {
 
 function Tabs({ label, className, children, ...props }: TabsProps) {
   return (
-    <BaseTabs.Root
+    <ShadcnTabs
       {...props}
-      defaultValue={props.defaultValue ?? 0}
       aria-label={label}
-      className={cn("flex flex-col", className)}
+      className={className}
+      defaultValue={props.defaultValue ?? 0}
     >
       {children}
-    </BaseTabs.Root>
+    </ShadcnTabs>
   );
 }
 
 function TabList({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <BaseTabs.List
-      className={cn(
-        "flex items-center rounded-t-md w-fit max-w-full",
-        "border-line",
-        "border-t border-x",
-        className,
-      )}
-    >
-      {children}
-    </BaseTabs.List>
-  );
+  return <ShadcnTabsList className={cn("max-w-full", className)}>{children}</ShadcnTabsList>;
 }
 
-function Tab({
-  value,
-  children,
-  className,
-  ...props
-}: ComponentProps<typeof BaseTabs.Tab> & { className?: string }) {
-  return (
-    <BaseTabs.Tab
-      value={value}
-      {...props}
-      className={cn(
-        "pl-2 pr-3 py-2.5",
-        "data-[selected]:bg-subtle",
-        "focus-ring z-10",
-        "border-r border-line",
-        "first:rounded-tl-md last:rounded-tr-md last:border-r-0",
-        className,
-      )}
-    >
-      {children}
-    </BaseTabs.Tab>
-  );
+function Tab({ children, ...props }: ComponentProps<typeof TabsTrigger>) {
+  return <TabsTrigger {...props}>{children}</TabsTrigger>;
 }
 
-function Panel({
-  value,
-  children,
-  className,
-  ...props
-}: ComponentProps<typeof BaseTabs.Panel> & { className?: string }) {
+// The panel frames its content, since the ACL editor fills it edge to edge.
+function Panel({ className, children, ...props }: ComponentProps<typeof TabsContent>) {
   return (
-    <BaseTabs.Panel
-      value={value}
-      {...props}
-      className={cn(
-        "w-full overflow-clip rounded-b-md rounded-r-md",
-        "border border-line",
-        className,
-      )}
-    >
+    <TabsContent {...props} className={cn("w-full overflow-clip rounded-lg border", className)}>
       {children}
-    </BaseTabs.Panel>
+    </TabsContent>
   );
 }
 

@@ -32,7 +32,7 @@ export default function HeadscaleUserRow({
           <Avatar name={displayName} src={user.profilePicUrl} />
           <div className="min-w-0">
             <p className="font-medium">{displayName}</p>
-            <div className="text-muted flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+            <div className="text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
               {displayUsername && <span>{displayUsername}</span>}
               {user.email && <span>{user.email}</span>}
               {user.groups.map((group) => (
@@ -44,7 +44,7 @@ export default function HeadscaleUserRow({
           </div>
         </div>
       </TableCell>
-      <TableCell className="text-muted whitespace-nowrap">
+      <TableCell className="text-muted-foreground whitespace-nowrap">
         <span suppressHydrationWarning title={new Date(user.createdAt).toLocaleString()}>
           {formatTimeDelta(new Date(user.createdAt))}
         </span>

@@ -1,23 +1,23 @@
 ---
 title: Docker
-description: Install Headplane with Docker.
+description: Install Northplane with Docker.
 ---
 
 # Docker
 
-The Docker image is the recommended way to run Headplane. It includes the web
+The Docker image is the recommended way to run Northplane. It includes the web
 UI, the [agent](/features/agent) and the [Browser SSH](/features/ssh) module,
 all prebuilt.
 
 ## Prerequisites
 
 - Docker with Docker Compose
-- Headscale and a Headplane config file, as described in
+- Headscale and a Northplane config file, as described in
   [Before installing](/install#before-installing)
 
 ## Installation
 
-Mount the config file and a directory for Headplane's own data, which holds
+Mount the config file and a directory for Northplane's own data, which holds
 its database and the agent's state:
 
 ```yaml
@@ -52,8 +52,8 @@ See [API keys](/configuration/api-keys) for how keys and sessions work.
 
 ## Health checks
 
-The image has a built-in healthcheck, so `docker ps` reports whether Headplane
-is up. It follows Headplane's port and TLS settings, and runs every 30 seconds
+The image has a built-in healthcheck, so `docker ps` reports whether Northplane
+is up. It follows Northplane's port and TLS settings, and runs every 30 seconds
 with a 5 second timeout and 3 retries. To change the timing, override it in the
 compose file:
 
@@ -74,5 +74,5 @@ with `bash` and `curl`.
 
 - To edit DNS and sign-in restrictions from the UI, set up the
   [Docker integration](/configuration/integrations#docker).
-- Put Headplane behind a [reverse proxy](/configuration/reverse-proxy).
+- Put Northplane behind a [reverse proxy](/configuration/reverse-proxy).
 - See [After installing](/install#after-installing) for the rest.

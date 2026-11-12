@@ -7,7 +7,7 @@ import { isUserPrincipal, type Principal } from "./auth";
  * Headscale stores providerId as a URL where the last path segment
  * is the subject (e.g. "https://idp.example.com/<uuid>"). This is
  * the ONLY place this parsing should occur, all other code should
- * use the stable headscale_user_id link on the Headplane user record.
+ * use the stable headscale_user_id link on the Northplane user record.
  */
 function getOidcSubject(user: User): string | undefined {
   if (user.provider !== "oidc" || !user.providerId) {

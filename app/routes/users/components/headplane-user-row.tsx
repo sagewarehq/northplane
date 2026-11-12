@@ -43,7 +43,7 @@ export default function HeadplaneUserRow({
           <Avatar name={displayName} src={user.profilePicUrl} />
           <div className="min-w-0">
             <p className="font-medium">{displayName}</p>
-            <div className="text-muted flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+            <div className="text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
               {displayUsername && <span>{displayUsername}</span>}
               {displayEmail && <span>{displayEmail}</span>}
               {user.groups.map((group) => (
@@ -56,10 +56,10 @@ export default function HeadplaneUserRow({
           </div>
         </div>
       </TableCell>
-      <TableCell className={cn(user.role === "member" && "text-muted")}>
+      <TableCell className={cn(user.role === "member" && "text-muted-foreground")}>
         {mapRoleToName(user.role)}
       </TableCell>
-      <TableCell className="text-muted whitespace-nowrap">
+      <TableCell className="text-muted-foreground whitespace-nowrap">
         {user.lastLoginAt ? (
           <span suppressHydrationWarning title={new Date(user.lastLoginAt).toLocaleString()}>
             {formatTimeDelta(new Date(user.lastLoginAt))}

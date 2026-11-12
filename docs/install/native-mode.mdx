@@ -1,20 +1,20 @@
 ---
 title: Native
-description: Build and run Headplane directly on a Linux host.
+description: Build and run Northplane directly on a Linux host.
 ---
 
 import { versions } from "@/lib/versions";
 
 # Native
 
-Headplane can run straight on the host, which suits setups where Headscale
+Northplane can run straight on the host, which suits setups where Headscale
 already runs there, usually under systemd. It's built from source once, then
 runs on Node.js.
 
 ## Prerequisites
 
 - Linux
-- Headscale and a Headplane config file, as described in
+- Headscale and a Northplane config file, as described in
   [Before installing](/install#before-installing)
 - To build: Go matching the `go` directive in `go.mod`, and pnpm{" "}
   <code>{versions.pnpm}</code>
@@ -40,14 +40,14 @@ for another location.
 ## Running
 
 Create the data directory from `server.data_path` (`/var/lib/headplane` by
-default) and make it writable by the user that runs Headplane:
+default) and make it writable by the user that runs Northplane:
 
 ```bash
 sudo mkdir -p /var/lib/headplane
 sudo chown -R headplane:headplane /var/lib/headplane
 ```
 
-Then start Headplane from the repository directory, so it can find `build/`:
+Then start Northplane from the repository directory, so it can find `build/`:
 
 ```bash
 node build/server/index.js
@@ -64,7 +64,7 @@ paths, then run `sudo systemctl daemon-reload` and
 
 ```ini
 [Unit]
-Description=Headplane
+Description=Northplane
 # Use headscale.service here instead if Headscale runs under systemd
 After=network.target
 
@@ -94,12 +94,12 @@ See [API keys](/configuration/api-keys) for how keys and sessions work.
 
 ## Custom path prefix
 
-To serve Headplane somewhere other than `/admin`, set `server.base_path`. See
+To serve Northplane somewhere other than `/admin`, set `server.base_path`. See
 [A different path](/configuration/reverse-proxy#a-different-path).
 
 ## Next steps
 
 - To edit DNS and sign-in restrictions from the UI, set up the
   [proc integration](/configuration/integrations#proc).
-- Put Headplane behind a [reverse proxy](/configuration/reverse-proxy).
+- Put Northplane behind a [reverse proxy](/configuration/reverse-proxy).
 - See [After installing](/install#after-installing) for the rest.

@@ -15,12 +15,12 @@ export const dockerCompose = `services:
       - "/path/to/data/storage:/var/lib/headplane"
 
       # Headscale's config file. The path inside this container must match
-      # \`headscale.config_path\` in Headplane's config.
+      # \`headscale.config_path\` in Northplane's config.
       - "/path/to/headscale/config.yaml:/etc/headscale/config.yaml"
 
       # To edit DNS records, mount the file from Headscale's
       # dns.extra_records_path too. If the path in this container differs,
-      # set \`headscale.dns_records_path\` in Headplane's config.
+      # set \`headscale.dns_records_path\` in Northplane's config.
       - "/path/to/headscale/dns_records.json:/etc/headscale/dns_records.json"
 
       # The Docker socket (or a socket proxy), used to restart Headscale
@@ -31,12 +31,12 @@ export const dockerCompose = `services:
     restart: unless-stopped
     command: serve
     labels:
-      # How Headplane finds the Headscale container
+      # How Northplane finds the Headscale container
       me.tale.headplane.target: headscale
     ports:
       - "8080:8080"
     volumes:
-      # The same files, at the same paths, as in Headplane's container
+      # The same files, at the same paths, as in Northplane's container
       - "/path/to/headscale/config.yaml:/etc/headscale/config.yaml"
       - "/path/to/headscale/dns_records.json:/etc/headscale/dns_records.json"
 
@@ -73,7 +73,7 @@ export const traefikCompose = `services:
       - "traefik.http.routers.headscale.tls=true"
       - "traefik.http.services.headscale.loadbalancer.server.port=8080"
 
-      # Optional: send visitors at / to Headplane
+      # Optional: send visitors at / to Northplane
       - "traefik.http.routers.root.rule=Host(\`headscale.example.com\`) && Path(\`/\`)"
       - "traefik.http.routers.root.entrypoints=websecure"
       - "traefik.http.routers.root.tls=true"

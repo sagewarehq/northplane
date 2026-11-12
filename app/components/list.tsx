@@ -4,7 +4,7 @@ import cn from "~/utils/cn";
 
 function List(props: HTMLProps<HTMLDivElement>) {
   return (
-    <div {...props} className={cn("rounded-lg", "border border-line", props.className)}>
+    <div {...props} className={cn("rounded-lg", "border border-border", props.className)}>
       {props.children}
     </div>
   );
@@ -16,7 +16,7 @@ function Item(props: HTMLProps<HTMLDivElement>) {
       {...props}
       className={cn(
         "flex items-center justify-between gap-3 px-3 py-2 last:border-b-0",
-        "border-b border-line",
+        "border-b border-border",
         props.className,
       )}
     >

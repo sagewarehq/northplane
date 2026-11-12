@@ -1,11 +1,13 @@
 import React from "react";
 
+import { Badge } from "~/components/ui/badge";
 import cn from "~/utils/cn";
 
+// shadcn's Badge, with Northplane's status tones.
 const variants = {
-  neutral: "bg-subtle text-muted border-line",
-  warn: "bg-warn-subtle text-warn border-transparent",
-  bad: "bg-bad-subtle text-bad border-transparent",
+  neutral: "border-border bg-muted text-muted-foreground",
+  warn: "bg-warn-subtle text-warn",
+  bad: "bg-bad-subtle text-bad",
 };
 
 export interface ChipProps {
@@ -24,17 +26,10 @@ export default function Chip({
   rightIcon,
 }: ChipProps) {
   return (
-    <span
-      className={cn(
-        "inline-flex h-[18px] items-center gap-x-1 rounded-sm border px-1.5",
-        "text-[11px] font-medium text-nowrap",
-        variants[variant],
-        className,
-      )}
-    >
+    <Badge className={cn(variants[variant], className)} variant="outline">
       {leftIcon}
       {text}
       {rightIcon}
-    </span>
+    </Badge>
   );
 }

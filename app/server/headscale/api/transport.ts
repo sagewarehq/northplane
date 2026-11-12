@@ -72,7 +72,7 @@ export async function createTransport(opts: TransportOptions): Promise<Transport
         headers: {
           ...options.headers,
           Accept: "application/json",
-          "User-Agent": `Headplane/${__VERSION__}`,
+          "User-Agent": `Northplane/${__VERSION__}`,
         },
         body: options.body,
         method: options.method,

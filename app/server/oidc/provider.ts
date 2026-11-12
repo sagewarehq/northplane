@@ -276,7 +276,7 @@ export function createOidcService(initialConfig: OidcConfig): OidcService {
       const error: OidcError = {
         code: "missing_endpoints",
         message: `Discovery is missing required endpoints: ${missing.join(", ")}`,
-        hint: "Your identity provider did not return all required endpoints. You can set them manually in your Headplane config.",
+        hint: "Your identity provider did not return all required endpoints. You can set them manually in your Northplane config.",
       };
 
       lastError = error;
@@ -615,7 +615,7 @@ export function createOidcService(initialConfig: OidcConfig): OidcService {
         if (!config.allowWeakRsaKeys) {
           return err({
             code: "invalid_id_token",
-            message: "ID token was signed with a weak RSA key that Headplane rejects by default",
+            message: "ID token was signed with a weak RSA key that Northplane rejects by default",
             hint: "If your provider cannot rotate to a 2048-bit-or-larger RSA signing key, set oidc.allow_weak_rsa_keys to true as a temporary compatibility fallback.",
           });
         }
@@ -627,7 +627,7 @@ export function createOidcService(initialConfig: OidcConfig): OidcService {
         return err({
           code: "invalid_id_token",
           message: "ID token signature verification failed",
-          hint: "The identity provider's signing keys may have changed. Try restarting Headplane to refresh the key cache.",
+          hint: "The identity provider's signing keys may have changed. Try restarting Northplane to refresh the key cache.",
         });
       }
 
@@ -695,7 +695,7 @@ export function createOidcService(initialConfig: OidcConfig): OidcService {
     return err({
       code: "invalid_id_token",
       message: "ID token signature verification failed",
-      hint: "The identity provider's signing keys may have changed. Try restarting Headplane to refresh the key cache.",
+      hint: "The identity provider's signing keys may have changed. Try restarting Northplane to refresh the key cache.",
     });
   }
 

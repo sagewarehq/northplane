@@ -19,8 +19,8 @@ export interface NumberInputProps {
 }
 
 const stepperClass = cn(
-  "grid size-7 place-items-center rounded-sm text-muted",
-  "hover:bg-hover hover:text-fg",
+  "grid size-7 place-items-center rounded-sm text-muted-foreground",
+  "hover:bg-accent hover:text-foreground",
 );
 
 export default function NumberInput({

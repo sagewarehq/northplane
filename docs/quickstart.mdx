@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Run Headscale and Headplane together on one server with Docker Compose.
+description: Run Headscale and Northplane together on one server with Docker Compose.
 ---
 
 import { quickstartCompose, quickstartFetch } from "./quickstart-examples";
@@ -12,9 +12,9 @@ import authKeyDialogDark from "./assets/auth-key-dialog-dark.png";
 
 # Quickstart
 
-This sets up a complete server from scratch: Headscale, Headplane and Caddy in
-one Compose project, on one domain. Caddy handles HTTPS, Headplane is served
-under `/admin`, and Headplane can edit Headscale's settings, including DNS.
+This sets up a complete server from scratch: Headscale, Northplane and Caddy in
+one Compose project, on one domain. Caddy handles HTTPS, Northplane is served
+under `/admin`, and Northplane can edit Headscale's settings, including DNS.
 
 Already running Headscale? Skip to [Installation](/install) instead.
 
@@ -37,7 +37,7 @@ server_url: https://headscale.example.com
 listen_addr: 0.0.0.0:8080
 
 policy:
-  # Store the ACL policy in the database so Headplane can edit it
+  # Store the ACL policy in the database so Northplane can edit it
   mode: database
 
 dns:
@@ -46,7 +46,7 @@ dns:
   extra_records_path: /etc/headscale/extra-records.json
 ```
 
-## 2. Configure Headplane
+## 2. Configure Northplane
 
 Generate a cookie secret with `openssl rand -hex 16`, then save this as
 `headplane/config.yaml`:
@@ -66,9 +66,9 @@ integration:
     enabled: true
 ```
 
-`url` is how Headplane reaches Headscale inside Docker, and `public_url` is the
+`url` is how Northplane reaches Headscale inside Docker, and `public_url` is the
 address shown to people connecting devices. With `config_path` and the Docker
-integration, Headplane can edit Headscale's settings and restart it to apply
+integration, Northplane can edit Headscale's settings and restart it to apply
 them.
 
 ## 3. Route traffic with Caddy
@@ -96,7 +96,7 @@ Save this as `compose.yaml`:
 <DynamicCodeBlock lang="yaml" code={quickstartCompose} />
 
 Both containers mount the `headscale` folder at the same path, which is how
-Headplane edits the file Headscale reads. The label lets Headplane find the
+Northplane edits the file Headscale reads. The label lets Northplane find the
 Headscale container through the Docker socket.
 
 ```bash
@@ -124,7 +124,7 @@ Create a user on the **Users** page for whoever owns the device, then choose
   `tailscale up --login-server https://headscale.example.com --auth-key <key>`.
 
 <Figure
-  alt="The Add machine menu in Headplane"
+  alt="The Add machine menu in Northplane"
   light={addMachineLight}
   dark={addMachineDark}
   caption="Two ways to add a machine"

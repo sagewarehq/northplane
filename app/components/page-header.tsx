@@ -27,7 +27,9 @@ export default function PageHeader({
           {title}
         </Heading>
         {description && (
-          <p className={cn("text-muted mt-1 max-w-prose", isSubpage && "text-sm")}>{description}</p>
+          <p className={cn("text-muted-foreground mt-1 max-w-prose", isSubpage && "text-sm")}>
+            {description}
+          </p>
         )}
       </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}

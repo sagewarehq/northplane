@@ -239,10 +239,12 @@ export async function startHeadscale(options: {
 
     // Docker on macOS delivers a host write as one combined inotify event,
     // which Headscale's records watcher ignores. A write from inside Docker
-    // arrives as separate events, so rewrite the file from there.
+    // arrives as separate events, so rewrite the file from there. The target
+    // is the same file through the bind mount, so copy its contents rather
+    // than stream the file, which Docker truncates mid-read ("Size mismatch").
     async reloadRecords() {
-      await container.copyFilesToContainer([
-        { source: recordsPath, target: "/etc/headscale/extra-records.json" },
+      await container.copyContentToContainer([
+        { content: await readFile(recordsPath), target: "/etc/headscale/extra-records.json" },
       ]);
     },
 

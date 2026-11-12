@@ -51,7 +51,7 @@ export default function Page({
         isSubpage
         description={
           <>
-            Limit who can sign in through OIDC. Headscale and Headplane both enforce these.{" "}
+            Limit who can sign in through OIDC. Headscale and Northplane both enforce these.{" "}
             <Link external styled to="https://headscale.net/stable/ref/oidc/#basic-configuration">
               Docs
             </Link>

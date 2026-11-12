@@ -57,7 +57,7 @@ export default function SshRuleDialog({
           // An action we do not know is listed as-is so it survives an edit.
           ...(KNOWN_SSH_ACTIONS.includes(draft.action)
             ? []
-            : [{ value: draft.action, label: `${draft.action} — not known to Headplane` }]),
+            : [{ value: draft.action, label: `${draft.action} — not known to Northplane` }]),
         ]}
         label="Action"
         onValueChange={(value) => setDraft({ ...draft, action: value ?? draft.action })}

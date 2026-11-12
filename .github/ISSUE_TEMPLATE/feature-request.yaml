@@ -1,5 +1,5 @@
 name: Feature Request
-description: Request a new feature or enhancement for Headplane
+description: Request a new feature or enhancement for Northplane
 assignees: [tale]
 labels: ["Feature", "Needs Triage"]
 body:
@@ -10,6 +10,6 @@ body:
         A detailed description of the feature you would like to see added.
         Please include any relevant context, such as why this feature is
         important and how it would benefit other users beyond yourself.
-      placeholder: e.g. "I would like to see support for custom themes in Headplane so that I can personalize the interface to my liking."
+      placeholder: e.g. "I would like to see support for custom themes in Northplane so that I can personalize the interface to my liking."
     validations:
       required: true

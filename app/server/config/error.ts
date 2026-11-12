@@ -26,7 +26,7 @@ const translationsWithVars: {
   CONFLICTING_SECRET_PATH_FIELD: ({ fieldName }) =>
     `Both "${fieldName}" and "${fieldName}_path" are set; please provide only one of these fields.`,
   DNS_RECORDS_PATH_UNSET: () =>
-    "headscale.dns_records_path is set but the Headscale config has no dns.extra_records_path. Set dns.extra_records_path in the Headscale config, or remove headscale.dns_records_path from the Headplane config.",
+    "headscale.dns_records_path is set but the Headscale config has no dns.extra_records_path. Set dns.extra_records_path in the Headscale config, or remove headscale.dns_records_path from the Northplane config.",
   INVALID_REQUIRED_FIELDS: ({ messages }) =>
     `The configuration is missing required fields or has invalid values:\n- ${messages.join("\n- ")}`,
   MISSING_INTERPOLATION_VARIABLE: ({ pathKey, variableName }) =>
