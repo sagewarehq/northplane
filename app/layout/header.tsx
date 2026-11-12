@@ -134,7 +134,7 @@ export default function Header({ user, access, configAvailable, network }: Heade
             </MenuTrigger>
             <MenuContent align="end">
               <MenuItem>
-                <Link external to="https://headplane.net">
+                <Link external to="https://northplane.sageware.io">
                   Docs
                 </Link>
               </MenuItem>

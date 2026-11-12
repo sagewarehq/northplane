@@ -20,7 +20,7 @@ export function OidcConfigErrorNotice({ errors }: { errors: OidcErrorCode[] }) {
           <li key={code.key}>{code.node}</li>
         ))}
       </ul>
-      <Link external styled to="https://headplane.net/features/sso#troubleshooting">
+      <Link external styled to="https://northplane.sageware.io/features/sso#troubleshooting">
         Troubleshooting
       </Link>
     </Callout>

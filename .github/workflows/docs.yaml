@@ -1,0 +1,62 @@
+name: Docs
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "docs/**"
+      - "CHANGELOG.md"
+      # Docs read version numbers from package.json and share the app's colors.
+      - "package.json"
+      - "app/tokens.css"
+      - ".github/workflows/docs.yaml"
+  workflow_dispatch:
+
+# Let a running deploy finish, so the site never ends up half published.
+concurrency:
+  group: docs
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # No HEADPLANE_DOCS_CHANNEL: there is one site, built from main, so the
+      # version picker and banner stay hidden.
+      - name: Build docs
+        run: pnpm docs:build
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/build/client
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

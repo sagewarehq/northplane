@@ -114,7 +114,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
   const description = (
     <>
       Syncs each machine's Tailscale version, OS, and connectivity from your tailnet.{" "}
-      <Link external styled to="https://headplane.net/features/agent">
+      <Link external styled to="https://northplane.sageware.io/features/agent">
         Docs
       </Link>
     </>

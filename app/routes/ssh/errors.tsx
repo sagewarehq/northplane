@@ -55,7 +55,7 @@ export function isSSHError(error: unknown): error is SSHErrorProps {
   );
 }
 
-export const SSH_DOCS_URL = "https://headplane.net/features/ssh";
+export const SSH_DOCS_URL = "https://northplane.sageware.io/features/ssh";
 
 export function SSHError({ title, message, anchor }: SSHErrorProps) {
   return (

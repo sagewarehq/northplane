@@ -128,7 +128,11 @@ export default function Page({ loaderData, actionData }: Route.ComponentProps) {
   ) : showCookieWarning ? (
     <Callout className="mb-6" title="Sign-in won't work over HTTP" variant="error">
       Northplane is set to use secure cookies, but this page was loaded over an insecure connection.{" "}
-      <Link external styled to="https://headplane.net/troubleshooting#signing-in-does-nothing">
+      <Link
+        external
+        styled
+        to="https://northplane.sageware.io/troubleshooting#signing-in-does-nothing"
+      >
         Docs
       </Link>
     </Callout>

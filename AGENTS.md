@@ -201,5 +201,11 @@ that minor's patches are cut from there.
 
 ### Docs deployment
 
-The docs site isn't deployed anywhere yet; run it locally with `pnpm docs:dev`.
-Docs fixes for a released version still go to its `release/X.Y` branch.
+`.github/workflows/docs.yaml` builds `main` and deploys it to GitHub Pages at
+northplane.sageware.io whenever a push touches `docs/`, `CHANGELOG.md`,
+`package.json` or `app/tokens.css`, or when run by hand. Only `main` is
+published, so the live docs describe the next release; released versions have
+no archived docs yet. Preview locally with `pnpm docs:dev`.
+
+Docs fixes for a released version still go to its `release/X.Y` branch, and
+land on `main` too when they also apply there.

@@ -34,7 +34,7 @@ These are some of the features that Northplane offers:
 
 ## Deployment
 
-Refer to the [website](https://headplane.net) for detailed installation instructions.
+Refer to the [website](https://northplane.sageware.io) for detailed installation instructions.
 
 ## Versioning
 
