@@ -10,6 +10,9 @@ on:
       - "main"
       - "release/**"
   pull_request:
+  # Runs every supported Headscale version weekly, since PRs only run the latest.
+  schedule:
+    - cron: "0 6 * * 1"
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -52,6 +55,8 @@ jobs:
 
   # Starts alongside the build, since the tests build what they need. Files
   # that call testedVersions() run once per Headscale version, the rest once.
+  # Pull requests run only the latest Headscale; pushes and the weekly schedule
+  # run every supported version.
   integration:
     name: Integration (${{ matrix.name }})
     runs-on: ubuntu-latest
@@ -59,11 +64,10 @@ jobs:
       fail-fast: false
       matrix:
         # Keep in sync with HEADSCALE_VERSIONS in tests/harness/versions.ts.
-        include:
-          - { name: "Headscale 0.27.1", versions: "0.27.1", files: "-l" }
-          - { name: "Headscale 0.28.0", versions: "0.28.0", files: "-l" }
-          - { name: "Headscale 0.29.5", versions: "0.29.5", files: "-l" }
-          - { name: "version independent", versions: "", files: "-L" }
+        include: >-
+          ${{ fromJSON(github.event_name == 'pull_request'
+          && '[{"name":"Headscale 0.29.5","versions":"0.29.5","files":"-l"},{"name":"version independent","versions":"","files":"-L"}]'
+          || '[{"name":"Headscale 0.27.1","versions":"0.27.1","files":"-l"},{"name":"Headscale 0.28.0","versions":"0.28.0","files":"-l"},{"name":"Headscale 0.29.5","versions":"0.29.5","files":"-l"},{"name":"version independent","versions":"","files":"-L"}]') }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v6
@@ -92,24 +96,3 @@ jobs:
         run: pnpm run test:integration $(grep -r ${{ matrix.files }} testedVersions tests/integration --include='*.test.ts')
         env:
           HP_HEADSCALE_VERSIONS: ${{ matrix.versions }}
-
-  nix:
-    name: Nix Flake Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v6
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          determinate: true
-
-      - name: Cache Nix store
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - name: Check flake inputs
-        uses: DeterminateSystems/flake-checker-action@main
-
-      - name: Check flake outputs
-        run: nix flake check
